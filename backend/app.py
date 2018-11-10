@@ -1,31 +1,40 @@
 from flask import Flask, jsonify, request
+from munch import Munch
 
 from .engine import *
 from .handleError import InvalidUsage
 
 app = Flask(__name__)
 
+
+def data_request_safe_check(request):
+    api_key = request.headers.get('Key')
+    start_date = request.args.get('start_date')
+    end_date = request.args.get('end_date')
+    if api_key == None:
+        raise InvalidUsage('API key not provided', status_code=410)
+    elif start_date == None or end_date == None:
+        raise InvalidUsage('time not provided', status_code=411)
+
+    payload = {'api_key': api_key,
+               'start_date': start_date, 'end_date': end_date}
+    return payload
+
 @app.route('/')
 def index():
     return {"message":"API request successful."}
 
-@app.route('/raw-data/<string:start_date>/<string:end_date>')
-def get_raw_by_id(start_date, end_date):
-    api_key = request.headers.get('Key')
-    if api_key:
-        response = raw_query(api_key, start_date, end_date)
-        return jsonify(response)
-    else:
-        raise InvalidUsage('API key not provided', status_code=410)
-
+@app.route('/raw-data')
+def get_raw_by_id():
+    payload = Munch(data_request_safe_check(request))
+    response = raw_query(payload.api_key, payload.start_date, payload.end_date)
+    return jsonify(response)
+    
 @app.route('/data')
 def get_data_by_id():
-    api_key = request.headers.get('Key')
-    if api_key:
-        response = query(api_key, start_date, end_date)
-        return jsonify(response)
-    else:
-        raise InvalidUsage('API key not provided', status_code=410)
+    payload = Munch(data_request_safe_check(request))
+    response = query(payload.api_key, payload.start_date, payload.end_date)
+    return jsonify(response)
 
 @app.errorhandler(InvalidUsage)
 def handle_nokey_usage(error):
