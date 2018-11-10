@@ -22,7 +22,7 @@ def data_request_safe_check(request):
 
 @app.route('/')
 def index():
-    return {"message":"API request successful."}
+    return jsonify({"message":"API request successful."})
 
 @app.route('/raw-data')
 def get_raw_by_id():
