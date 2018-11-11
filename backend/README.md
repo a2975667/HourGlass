@@ -29,6 +29,35 @@ params:
     - end_date: yyyy-mm-dd
 Example: localhost:5000/data?start_date=2018-10-30&end_date=2018-10-30
 ```
+```Json
+{
+    "notes": "data is an array of arrays (rows), column names for rows in row_headers",
+    "row_headers": [
+        "Date",
+        "Time Spent (seconds)",
+        "Number of People",
+        "Activity",
+        "Category",
+        "Productivity"
+    ],
+    "rows": [
+        [
+            "2018-10-30T00:00:00",
+            129,
+            1,
+            "facebook.com",
+            "General Social Networking",
+            -2
+        ],
+        [
+            "2018-10-30T00:15:00",
+            5,
+            1,
+            "facebook.com",
+            "General Social Networking",
+            -2
+        ],...
+```
 
 
 ### [GET] /data
