@@ -1,0 +1,32 @@
+{
+  "projects": [
+                  {
+                    "meeting": "1st Meeting",
+                    "type": "project",
+                    "date": "09/03/2017",
+                    "label": "Project 002/2017",
+                    "status": "approved"
+                  },
+                  {
+                    "meeting": "1st Meeting",
+                    "type": "project",
+                    "date": "09/03/2017",
+                    "label": "Project 005/2017",
+                    "status": "voting_round_1"
+                  },
+                  {
+                    "meeting": "1st Meeting",
+                    "type": "project",
+                    "date": "09/03/2017",
+                    "label": "Project 003/2017",
+                    "status": "voting_round_2"
+                  },
+                  {
+                    "meeting": "1st Meeting",
+                    "type": "project",
+                    "date": "09/03/2017",
+                    "label": "Project 004/2017",
+                    "status": "voting_round_2"
+                  }
+               ]
+}
