@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from munch import Munch
 
-from HourGlass.lib.engine import *
+from lib.engine import *
 # import sys
 # import os.path
 
