@@ -1,6 +1,10 @@
 from flask import Flask, jsonify, request
 from munch import Munch
 
+import sys
+import os.path
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from .engine import *
 from .handleError import InvalidUsage
 
