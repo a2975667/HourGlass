@@ -36,6 +36,18 @@ def get_data_by_id():
     response = query(payload.api_key, payload.start_date, payload.end_date)
     return jsonify(response)
 
+@app.route('/rank-distract')
+def get_rank_distract_data():
+    payload = Munch(data_request_safe_check(request))
+    response = query(payload.api_key, payload.start_date, payload.end_date)
+    return jsonify(response)
+
+@app.route('/rank-aggregate')
+def get_rank_aggregate_data():
+    payload = Munch(data_request_safe_check(request))
+    response = query(payload.api_key, payload.start_date, payload.end_date)
+    return jsonify(response)
+
 @app.errorhandler(InvalidUsage)
 def handle_nokey_usage(error):
     response = jsonify(error.to_dict())
