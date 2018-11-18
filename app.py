@@ -1,10 +1,10 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory, redirect
 from munch import Munch
 
 from lib.engine import *
 from lib.handleError import InvalidUsage
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='frontend')
 
 
 def data_request_safe_check(request):
@@ -21,7 +21,15 @@ def data_request_safe_check(request):
     return payload
 
 @app.route('/')
-def index():
+def hello():
+    return redirect("/index.html", code=302)
+
+@app.route('/<path:filename>')  
+def send_file(filename):  
+    return send_from_directory(app.static_folder, filename)
+
+@app.route('/api/')
+def api():
     return jsonify({"message":"API request successful."})
 
 @app.route('/raw-data')
