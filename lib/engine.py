@@ -46,9 +46,17 @@ def sort_by_time(api_key, start_date, end_date, n=10):
             lst += [event]
             distractions[event[2]].append((event[0], event[1], event[3]))
 
-    intermediate = sorted([(len(distractions[x]), x) for x in distractions], reverse=True)[:10]
+    intermediate = sorted([(len(distractions[x]), x) for x in distractions], reverse=True)[:n]
     results = [{'name': x[1], 'time':distractions[x[1]], 'times':x[0], 'category':distractions[x[1]][2][2]} for x in intermediate]
-        
 
     return results
 
+def aggregate(api_key, start_date, end_date, n=10):
+    data = query(api_key, start_date, end_date)
+    result = []
+    for site in data:
+        total_time = 0
+        time = [d[1] for d in data[site]]
+        result.append( (sum(time), site))
+    result = sorted(result, reverse=True)[:n]
+    return result

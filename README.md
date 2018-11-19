@@ -12,13 +12,13 @@ after establishing virtual environment
 Note: ask someone for api key or generate one
 
 ## Usage
-### [GET] /
+### [GET] /api
 Dummy index to test api
 ```Json
 {"message": "API request successful."}
 ```
 
-### [GET] /raw-data
+### [GET] /api/raw-data
 Returns the raw-data from rescure time api by providing key, start data and end date.
 
 ```Usage
@@ -60,7 +60,7 @@ Example: localhost:5000/data?start_date=2018-10-30&end_date=2018-10-30
 ```
 
 
-### [GET] /data
+### [GET] /api/data
 Returns filtered data from backend server by providing key, start data and end date.
 
 ```Usage
@@ -101,4 +101,80 @@ params:
             125,
             "Project Management"],...
     ], ... }
+```
+
+### [GET] /api/rank-distract
+Returns top n distracted sites within given time frame
+
+```Usage
+headers: 
+    - api-key: [api-key]
+params: 
+    - start_date: yyyy-mm-dd
+    - end_date: yyyy-mm-dd
+    - n: [int]
+```
+
+```Json
+[
+    {
+        "category": "Search",
+        "name": "google.com",
+        "time": [
+            [
+                "2018-11-05T01:25:00",
+                13,
+                "Search"
+            ],
+            [
+                "2018-11-05T02:00:00",
+                18,
+                "Search"
+            ],
+            [
+                "2018-11-05T02:05:00",
+                30,
+                "Search"
+            ],
+            ...],
+        "times": 32
+    },
+    {
+        "category": "General Social Networking",
+        "name": "facebook.com",
+        "time": [...],
+        "times": 19
+    },
+    {
+        "category": "Video",
+        "name": "youtube.com",
+        "time": [...],
+        "times": 8
+    },...}
+```
+
+### [GET] /api/rank-aggregate
+Returns top n most visited sites by aggregate time (seconds) within given time frame
+
+```Usage
+headers: 
+    - api-key: [api-key]
+params: 
+    - start_date: yyyy-mm-dd
+    - end_date: yyyy-mm-dd
+    - n: [int]
+```
+
+```Json
+[
+    [
+        3706,
+        "youtube.com"
+    ],
+    [
+        2615,
+        "facebook.com"
+    ],
+    ...
+]
 ```

@@ -53,8 +53,7 @@ def get_rank_distract_data():
 @app.route('/api/rank-aggregate')
 def get_rank_aggregate_data():
     payload = Munch(data_request_safe_check(request))
-    response = '404'
-    #response = query(payload.api_key, payload.start_date, payload.end_date)
+    response = aggregate(payload.api_key, payload.start_date, payload.end_date)
     return jsonify(response)
 
 @app.errorhandler(InvalidUsage)
