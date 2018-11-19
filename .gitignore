@@ -1,3 +1,5 @@
 # Backend venv files
-/backend/.venv
-/backend/__pycache__
+.venv
+.vscode
+__pycache__
+lib/__pycache__
