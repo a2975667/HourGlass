@@ -32,26 +32,25 @@ def send_file(filename):
 def api():
     return jsonify({"message":"API request successful."})
 
-@app.route('/raw-data')
+@app.route('/api/raw-data')
 def get_raw_by_id():
     payload = Munch(data_request_safe_check(request))
     response = raw_query(payload.api_key, payload.start_date, payload.end_date)
     return jsonify(response)
     
-@app.route('/data')
+@app.route('/api/data')
 def get_data_by_id():
     payload = Munch(data_request_safe_check(request))
     response = query(payload.api_key, payload.start_date, payload.end_date)
     return jsonify(response)
 
-@app.route('/rank-distract')
+@app.route('/api/rank-distract')
 def get_rank_distract_data():
     payload = Munch(data_request_safe_check(request))
-    response = '404'
-    #response = query(payload.api_key, payload.start_date, payload.end_date)
+    response = sort_by_time(payload.api_key, payload.start_date, payload.end_date)
     return jsonify(response)
 
-@app.route('/rank-aggregate')
+@app.route('/api/rank-aggregate')
 def get_rank_aggregate_data():
     payload = Munch(data_request_safe_check(request))
     response = '404'
