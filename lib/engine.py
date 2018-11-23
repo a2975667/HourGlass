@@ -24,7 +24,7 @@ def query(api_key, start_date, end_date):
     data = _filter_data(data)
     return dict(data)
     
-def sort_by_time(api_key, start_date, end_date, n=10):
+def sort_by_time(api_key, start_date, end_date, n=10, summary=False):
     data = raw_query(api_key, start_date, end_date)
     time_dict = defaultdict(lambda: {})
     for d in data['rows']:
@@ -47,8 +47,12 @@ def sort_by_time(api_key, start_date, end_date, n=10):
             distractions[event[2]].append((event[0], event[1], event[3]))
 
     intermediate = sorted([(len(distractions[x]), x) for x in distractions], reverse=True)[:n]
-    results = [{'name': x[1], 'time':distractions[x[1]], 'times':x[0], 'category':distractions[x[1]][2][2]} for x in intermediate]
+    if summary:
+        results = [{'name': x[1], 'count':x[0], 'category':distractions[x[1]][2][2]} for x in intermediate]
+    else:
+        results = [{'name': x[1], 'time':distractions[x[1]], 'times':x[0], 'category':distractions[x[1]][2][2]} for x in intermediate]
 
+    print (results)
     return results
 
 def aggregate(api_key, start_date, end_date, n=10):
