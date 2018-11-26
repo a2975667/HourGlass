@@ -56,7 +56,7 @@ def sort_by_time(api_key, start_date, end_date, n=10, summary=False):
     else:
         results = [{'name': x[1], 'time':distractions[x[1]], 'times':x[0], 'category':distractions[x[1]][2][2]} for x in intermediate]
 
-    print (results)
+    #print (results)
     return results
 
 def sort_by_time_for_d3(api_key, start_date, end_date, n=10):
