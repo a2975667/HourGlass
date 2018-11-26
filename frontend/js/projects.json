@@ -1,32 +1,10 @@
-{
-  "projects": [
-                  {
-                    "meeting": "1st Meeting",
-                    "type": "project",
-                    "date": "09/03/2017",
-                    "label": "Project 002/2017",
-                    "status": "approved"
-                  },
-                  {
-                    "meeting": "1st Meeting",
-                    "type": "project",
-                    "date": "09/03/2017",
-                    "label": "Project 005/2017",
-                    "status": "voting_round_1"
-                  },
-                  {
-                    "meeting": "1st Meeting",
-                    "type": "project",
-                    "date": "09/03/2017",
-                    "label": "Project 003/2017",
-                    "status": "voting_round_2"
-                  },
-                  {
-                    "meeting": "1st Meeting",
-                    "type": "project",
-                    "date": "09/03/2017",
-                    "label": "Project 004/2017",
-                    "status": "voting_round_2"
-                  }
-               ]
-}
+[
+      {"activity": "Facebook", "category": "Social Networking", "task" : "off", "from": "15-00-00", "to": "15-06-00"},
+      {"activity": "Youtube", "category": "Social Networking", "task" : "off", "from": "17-30-00", "to": "17-35-00"},
+      {"activity": "Compass", "category": "Work", "task" : "on", "from": "18-00-00", "to": "18-30-00"},
+      {"activity": "Udacity", "category": "Work", "task" : "on", "from": "16-20-00", "to": "17-00-00"},
+      {"activity": "Netflix", "category": "TV Shows", "task" : "off", "from": "23-00-00", "to": "24-00-00"},
+      {"activity": "Hulu", "category": "TV Shows", "task" : "off", "from": "00-30-00", "to": "10-36-00"},
+      {"activity": "Pinterest", "category": "Social Networking", "task" : "off", "from": "15-30-00", "to": "15-40-00"},
+      {"activity": "Twitter", "category": "Social Networking", "task" : "off", "from": "12-45-00", "to": "12-50-00"}
+]

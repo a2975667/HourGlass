@@ -1,39 +1,46 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-	<title>D3</title>
+	<title>Gantt Chart</title>
 	<meta charset="utf-8" />
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <script language="JavaScript" type="text/javascript" src="js/jquery.min.js"></script>
   <script language="JavaScript" type="text/javascript" src="js/d3.js"></script>
-  <script language="JavaScript" type="text/javascript" src="js/vis.js"></script>
+  
 
 </head>
 <style>
-svg {
-  /*position: absolute;*/
-  width: 1000px;
-  height: 800px;
-  border: 1px lightgray solid;
-}
 
-div.tooltip {
-    /*position: absolute;*/
-/*    text-align: center;
-    width: 150px;
-    padding: 2px;
-    font: 12px sans-serif;
-    background: lightsteelblue;
-    border: 0px;
-    border-radius: 8px;
-    pointer-events: none;*/
-}
+
 </style>
 <body>
-  <div id="nav">
-    <h1> HourGlass </h1>
+  <script>
+    // var today = new Date();
+    // var year = today.getFullYear();
+    // var month = today.getMonth()+1; //Month of January starts at 0
+    // var day = today.getDate();
+    
+    // if(day<10) { 
+    //   day = '0'+day
+    // } 
+
+    // if(month<10) {
+    //   month = '0'+month
+    // } 
+
+    // today = month + '/' + day + '/' + year;
+    // ($"#subtext").html("")
+  </script>
+  <div class="title">
+    <h2> Hi Johnny Appleseed, </h2>
+    <h3 id="subtext"> Here is a summary of your online behavior today (Wednesday November 26) </h3>
   </div>
+
   <div id="container">
-    <svg>
-    </svg>
+  
   </div>
+    <script language="JavaScript" type="text/javascript" src="js/vis.js"></script>
+  <div id="nav">
 </body>
 </html>
