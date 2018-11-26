@@ -1,19 +1,23 @@
- var parseDate = d3.time.format("%H-%M-%S").parse;
+// Asks JavaScript to show more errors.
+"use strict";
 
-    var data=[
-     {"category": "Source 1", "from": "00-00-00", "to": "15-06-00"},
-     {"category": "Source 2", "from": "17-30-00", "to": "17-35-00"},
-     {"category": "Source 3", "from": "18-00-00", "to": "18-30-00"},
-     {"category": "Source 4", "from": "16-20-00", "to": "17-00-00"},
-     {"category": "Source 5", "from": "20-00-00", "to": "24-00-00"},
-     {"category": "Source 1", "from": "15-30-00", "to": "15-36-00"}
-    ]
+
+
+$(function() {
+    $.getJSON("js/projects.json")
+        .done(function(data) { visualize(data); })
+        .fail(function() { alert("Failed to load the JSON file!\n(Did your Python run?)"); });
+});
+
+
+var visualize = function(data) {
+ var parseDate = d3.time.format("%H-%M-%S").parse;
 
     data.forEach(function(d) {
         d.from = parseDate(d.from);
         d.to = parseDate(d.to);
     });
-    var margin = {top: 50, right: 50, bottom: 50, left: 100},
+    var margin = {top: 50, right: 50, bottom: 50, left: 150},
         width = 2000 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
@@ -22,7 +26,7 @@
 
     var x = d3.time.scale().range([0, width]);
 
-    y.domain(data.map(function(d) { return d.category; }));
+    y.domain(data.map(function(d) { return d.activity; }));
     x.domain([d3.min(data,function(d){return d.from;}), d3.max(data,function(d){return d.to;})]);
 
     var xAxis = d3.svg.axis()
@@ -59,37 +63,56 @@
           .data(data)
           .enter().append("rect")
           .attr("class", "bar")
-          .attr("y", function(d) { return y(d.category); })
+          .attr("y", function(d) { return y(d.activity); })
           .attr("height", "20")
-          .attr("transform", "translate(0,20)")
+          .attr("fill",function(d) {
+            if(d.task == "on") {
+              return "#ffcc2e";
+            }
+            else if(d.task == "off") {
+              return "#3498df";
+            }
+            else {
+              return "#444";
+            }
+          })
+          .attr("transform", "translate(0,10)")
           .attr("x", function(d) { return x(d.from); })
           .attr("width", function(d) { return x(d.to) - x(d.from)});
 
 
-    // var tooltip = d3.select("#container")
-    // .append('div')
-    // .attr('class', 'tooltip');
+    var tooltip = d3.select("#container")
+    .append('div')
+    .attr('class', 'tooltip');
 
-    // tooltip.append('div').attr('class', 'category');
-    // tooltip.append('div').attr('class', 'tempRange');
-    // // tooltip.append('div').attr('class', 'progress');
+    tooltip.append('div').attr('class', 'activity');
+    tooltip.append('div').attr('class', 'task')
+    tooltip.append('div').attr('class', 'tempRange');
+    // tooltip.append('div').attr('class', 'progress');
 
-    // svg.selectAll(".bar,.pending")
-    // .on('mouseover', function(d) {
+    svg.selectAll(".bar,.pending")
+    .on('mouseover', function(d) {
 
-    //   tooltip.select('.category').html("<b>" + d.category + "</b>");
-    //   tooltip.select('.tempRange').html(d.from.toDateString() + " to " + d.to.toDateString());
-    //   // tooltip.select('.progress').html(d.progress + "% completed");
+      tooltip.select('.activity').html("<b>" + d.activity + "</b>");
+      tooltip.select('.activity').html("<b>" + d.activity + "</b>");
+      tooltip.select('.tempRange').html(d.from.toDateString() + " to " + d.to.toDateString());
+      
+      // tooltip.select('.progress').html(d.progress + "% completed");
 
-    //   tooltip.style('display', 'block');
-    //   tooltip.style('opacity',2);
+      tooltip.style('display', 'block');
+      tooltip.style('opacity',2);
 
-    // })
-    // .on('mousemove', function(d) {
-    //   tooltip.style('top', (d3.event.layerY + 10) + 'px')
-    //   .style('left', (d3.event.layerX - 15) + 'px');
-    // })
-    // .on('mouseout', function() {
-    //   tooltip.style('display', 'none');
-    //   tooltip.style('opacity',0);
-    // });
+    })
+    .on('mousemove', function(d) {
+      tooltip.style('top', (d3.event.layerY + 10) + 'px')
+      .style('left', (d3.event.layerX) + 'px');
+      console.log(d3.event.layerX);
+    })
+    .on('mouseout', function() {
+      tooltip.style('display', 'none');
+      tooltip.style('opacity',0);
+    });
+
+
+
+};

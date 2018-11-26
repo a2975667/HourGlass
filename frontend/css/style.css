@@ -8,19 +8,28 @@ h1 {
 	transform: translateX(-50%);
 	left:50%;
 }
+h3, h2 {
+	text-align: center;
+	position: fixed;
+	transform: translateX(-50%);
+	left:50%;
+}
+h3 {
+	padding-top:35px;
+}
 .title {
-	padding-top:40px;
-	padding-bottom:60px;
+	padding-top:0px;
 }
 
 
 .bar {
-    fill: #3498df;
+    /*fill: #444;*/
     border-radius: 25px;
+    transition: all 0.1s linear;
 }
 
-.bar:hover, .pending:hover {
-    fill: #3498ff;
+.bar:hover {
+    opacity: 0.7;
 }
 
 .axis path,.axis line {
@@ -36,18 +45,23 @@ h1 {
     box-shadow: 2px 2px 1px #888;
 }
 
-    .tooltip {
-        background: #fff;
-        box-shadow: 0 0 5px #999999;
-        border-radius: 5px;
-        color: #333;
-        font-size: 12px;
-        left: 130px;
-        padding: 10px;
-        position: absolute;
-        text-align: center;
-        top: 95px;
-        z-index: 10;
-        display: block;
-        opacity: 0;
-    }
+#container {
+	padding-top: 150px;
+}
+
+.tooltip {
+    background: #fff;
+    box-shadow: 0 0 5px #999999;
+    border-radius: 5px;
+    color: #333;
+    font-size: 12px;
+    left: 120px;
+    padding: 10px;
+    position: absolute;
+    text-align: center;
+    top: 95px;
+    width: 150px;
+    z-index: 10;
+    display: block;
+    opacity: 0;
+}
