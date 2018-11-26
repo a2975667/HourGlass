@@ -2,20 +2,43 @@
 <meta charset="utf-8">
 	<link rel="stylesheet" href="css/style.css" type="text/css" />
 	<style>
+		div {
+			display: inline-block;
+		}
+
+		#left-container {
+			text-align: left;
+		}
+
+		#right-container {
+			text-align: left;
+			line-height: 80%;
+		}
 	</style>
 	<body>
+	<div id="container">
 		<div id="nav">
 	    <h1>HourGlass</h1>
 	  </div>
-		<div id="container">
-	    <h2>Weekly Overview</h2>
-			<div id="d3id" ></div>
-			<h3>Progress</h3>
-			<p id="goalMet">0</p>
-			<p id="highest">0</p>
-			<p id="average">0</p>
-			<p id="lowest">0</p>
-	  </div>
+			<div id="left-container">
+		    <h2>Weekly Overview</h2>
+				<div id="d3id" ></div>
+		  </div>
+			<div id="right-container">
+				<h2>Progress</h2>
+				<h4>Weeks of Goals Met:</h4>
+				<p id="goalMet">0</p>
+				<h4>Highest Number of Distractions</h4>
+				<p id="highest">0</p>
+				<i>/week</i>
+				<h4>Average Number of Distractions</h4>
+				<p id="average">0</p>
+				<i>/week</i>
+				<h4>Lowest Number of Distractions</h4>
+				<p id="lowest">0</p>
+				<i>/week</i>
+			</div>
+		</div>
 
 		<script src="https://d3js.org/d3.v4.min.js"></script>
 
