@@ -21,8 +21,12 @@ def data_request_safe_check(request):
     return payload
 
 @app.route('/')
-def hello():
+def index():
     return redirect("/index.html", code=302)
+
+@app.route('/barchart')
+def barchart():
+    return redirect("/barchart.html", code=302)
 
 @app.route('/<path:filename>')  
 def send_file(filename):  
