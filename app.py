@@ -54,6 +54,12 @@ def get_rank_distract_data():
     response = sort_by_time(payload.api_key, payload.start_date, payload.end_date)
     return jsonify(response)
 
+@app.route('/api/rank-distract-for-d3')
+def get_rank_distract_data_for_d3():
+    payload = Munch(data_request_safe_check(request))
+    response = sort_by_time_for_d3(payload.api_key, payload.start_date, payload.end_date)
+    return jsonify(response)
+
 @app.route('/api/summary/rank-distract')
 def get_summary_rank_distract_data():
     payload = Munch(data_request_safe_check(request))
