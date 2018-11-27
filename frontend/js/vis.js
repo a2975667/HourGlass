@@ -5,7 +5,9 @@
 
 $(function() {
     $.getJSON("js/projects.json")
-        .done(function(data) { visualize(data); })
+        .done(function(data) { 
+        localStorage.setItem('key',JSON.stringify(data));
+          visualize(data); })
         .fail(function() { alert("Failed to load the JSON file!\n(Did your Python run?)"); });
 });
 
@@ -86,15 +88,32 @@ var visualize = function(data) {
           .attr("y", function(d) { return y(d.name); })
           .attr("height", "10")
           .attr("fill",function(d) {
-            if(d.task == "on") {
-              return "#ffcc2e";
+            var p = localStorage.getItem('productive');
+            var np = localStorage.getItem('non-productive');
+            if(p==null || np == null)
+                return "#444";
+            p = p.split(",");
+            np = np.split(",");
+            for(var i = 0 ; i < p.length; i++){
+              if (p[i]==d.name) {
+                return "#ffcc2e";
+              }
             }
-            else if(d.task == "off") {
-              return "#3498df";
+            for(var i = 0; i < np.length; i++) {
+              if (np[i] == d.name) {
+                return "#3498df";
+              }
             }
-            else {
-              return "#444";
-            }
+
+            // if(d.task == "on") {
+            //   return "#ffcc2e";
+            // }
+            // else if(d.task == "off") {
+            //   return "#3498df";
+            // }
+            // else {
+            //   return "#444";
+            // }
           })
           .attr("transform", "translate(0,16)")
           .attr("x", function(d) { return x(d.from); })
