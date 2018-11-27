@@ -170,7 +170,7 @@ var visualizeCal = function(data) {
         dd.from = parseDate2(dd.from);
         dd.to = parseDate2(dd.to);
     });
-    var margin = {top: 50, right: 50, bottom: 0, left: 150},
+    var margin = {top: 50, right: 50, bottom: 20, left: 150},
         width = 2000 - margin.left - margin.right,
         height = 80;
 
@@ -262,15 +262,15 @@ var visualizeCal = function(data) {
     .attr('class', 'tooltip');
 
     tooltip.append('div').attr('class', 'name');
-    tooltip.append('div').attr('class', 'task')
+    tooltip.append('div').attr('class', 'status')
     tooltip.append('div').attr('class', 'tempRange');
     // tooltip.append('div').attr('class', 'progress');
 
     svg.selectAll(".bar,.pending")
     .on('mouseover', function(d) {
 
-      tooltip.select('.name').html("<b>" + d.name + " Status: </b>");
-      tooltip.select('.task').html("<b> Work Time </b>");
+      tooltip.select('.name').html("Status: <b>" + d.name + "</b>");
+      // tooltip.select('.status').html("<b> + d.name </b>");
       tooltip.select('.tempRange').html(d.from.toString().substr(4,20) + " TO " + d.to.toString().substr(4,20));
       
       // tooltip.select('.progress').html(d.progress + "% completed");
@@ -288,7 +288,5 @@ var visualizeCal = function(data) {
       tooltip.style('display', 'none');
       tooltip.style('opacity',0);
     });
-
-
 
 };
