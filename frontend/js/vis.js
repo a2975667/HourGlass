@@ -11,7 +11,8 @@ $(function() {
 
 
 var visualize = function(data) {
- var parseDate = d3.time.format("%H-%M-%S").parse;
+ // var parseDate = d3.time.format("%H-%M-%S").parse;
+    var parseDate = d3.time.format("%Y-%m-%dT%H:%M:%S").parse;
 
     data.forEach(function(d) {
         d.from = parseDate(d.from);
@@ -22,21 +23,27 @@ var visualize = function(data) {
         height = 500 - margin.top - margin.bottom;
 
     var y = d3.scale.ordinal()
-        .rangeRoundBands([0, height], .2);
+        .rangeRoundBands([0, height], .1);
 
     var x = d3.time.scale().range([0, width]);
 
-    y.domain(data.map(function(d) { return d.activity; }));
+    y.domain(data.map(function(d) { return d.name; }));
     x.domain([d3.min(data,function(d){return d.from;}), d3.max(data,function(d){return d.to;})]);
 
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("bottom")
-        .ticks(30)
-        .tickFormat(d3.time.format("%H:%M"));
+        .ticks(10).outerTickSize(0)
+        .tickSize(0)
+        .tickPadding(10)
+        // .attr("font-size","4em")
+        .tickFormat(d3.time.format("%H %p"));
 
     var yAxis = d3.svg.axis()
         .scale(y)
+        .tickSize(0)
+        .tickPadding(10)
+        // .attr("fill","none")
         .orient("left");
 
     var svg = d3.select("#container").append("svg")
@@ -47,24 +54,37 @@ var visualize = function(data) {
 
       svg.append("g")
           .attr("class", "x axis")
+          .style('font-weight','bold')
+          .style('font-family','Raleway')
+          .style('text-transform','lowercase')
           .attr("transform", "translate(0," + height + ")")
           .call(xAxis)
           .append("text")
           .attr("x", width-margin.right)
           .attr("dx", ".71em")
           .attr("dy", "-0.2em")
+
           .text("Time");
+
+      function customYAxis(g) {
+        var s = g.selection ? g.selection() : g;
+        g.call(yAxis);
+        s.select(".domain").remove();
+        
+      }
 
       svg.append("g")
           .attr("class", "y axis")
-          .call(yAxis);
+          .style('font-style', 'italic')
+          .style('font-family','Raleway')
+          .call(customYAxis);
 
       svg.selectAll(".bar")
           .data(data)
           .enter().append("rect")
           .attr("class", "bar")
-          .attr("y", function(d) { return y(d.activity); })
-          .attr("height", "20")
+          .attr("y", function(d) { return y(d.name); })
+          .attr("height", "10")
           .attr("fill",function(d) {
             if(d.task == "on") {
               return "#ffcc2e";
@@ -76,7 +96,7 @@ var visualize = function(data) {
               return "#444";
             }
           })
-          .attr("transform", "translate(0,10)")
+          .attr("transform", "translate(0,16)")
           .attr("x", function(d) { return x(d.from); })
           .attr("width", function(d) { return x(d.to) - x(d.from)});
 
@@ -85,7 +105,7 @@ var visualize = function(data) {
     .append('div')
     .attr('class', 'tooltip');
 
-    tooltip.append('div').attr('class', 'activity');
+    tooltip.append('div').attr('class', 'name');
     tooltip.append('div').attr('class', 'task')
     tooltip.append('div').attr('class', 'tempRange');
     // tooltip.append('div').attr('class', 'progress');
@@ -93,9 +113,9 @@ var visualize = function(data) {
     svg.selectAll(".bar,.pending")
     .on('mouseover', function(d) {
 
-      tooltip.select('.activity').html("<b>" + d.activity + "</b>");
-      tooltip.select('.activity').html("<b>" + d.activity + "</b>");
-      tooltip.select('.tempRange').html(d.from.toDateString() + " to " + d.to.toDateString());
+      tooltip.select('.name').html("<b>" + d.name + "</b>");
+      tooltip.select('.name').html("<b>" + d.name + "</b>");
+      tooltip.select('.tempRange').html(d.from.toString().substr(4,20) + " TO " + d.to.toString().substr(4,20));
       
       // tooltip.select('.progress').html(d.progress + "% completed");
 
