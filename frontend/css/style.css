@@ -1,3 +1,30 @@
+/***** nav ****/
+.topnav {
+    overflow: hidden;
+    position: fixed;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    color: #333;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: 'Raleway';
+    font-size: 17px;
+    transition: all 0.1s linear;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    color: #aaa;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+    color:#ffcc2e;
+}
 /***** normal Styling things *****/
 body {
     padding: 0px;
@@ -38,7 +65,7 @@ h3 {
     /*padding-top:35px;*/
 }
 
-#settings {
+/*#settings {
     position: absolute;
     height: 25px;
     margin-left: 100%;
@@ -46,7 +73,7 @@ h3 {
     /*image-rendering: auto;*/
     /*image-rendering: crisp-edges;*/
     /*image-rendering: pixelated;*/
-}
+}*/
 
 /************** d3 Styling **************/
 
@@ -235,9 +262,6 @@ a {
 
 }
 
-a:visited {
-    color: #fff;
-}
 
 #signin {
     margin-left: auto;
