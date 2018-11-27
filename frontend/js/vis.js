@@ -27,9 +27,9 @@ var visualize = function(data) {
         d.from = parseDate(d.from);
         d.to = parseDate(d.to);
     });
-    var margin = {top: 50, right: 50, bottom: 50, left: 150},
+    var margin = {top: 0, right: 50, bottom: 50, left: 150},
         width = 2000 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+        height = 450 - margin.top - margin.bottom;
 
     var y = d3.scale.ordinal()
         .rangeRoundBands([0, height], .1);
@@ -132,15 +132,15 @@ var visualize = function(data) {
     .attr('class', 'tooltip');
 
     tooltip.append('div').attr('class', 'name');
-    tooltip.append('div').attr('class', 'task')
+    tooltip.append('div').attr('class', 'category')
     tooltip.append('div').attr('class', 'tempRange');
     // tooltip.append('div').attr('class', 'progress');
 
     svg.selectAll(".bar,.pending")
     .on('mouseover', function(d) {
 
-      tooltip.select('.name').html("<b>" + d.name + "</b>");
-      tooltip.select('.name').html("<b>" + d.name + "</b>");
+      tooltip.select('.name').html("Site: <b>" + d.name + "</b>");
+      tooltip.select('.category').html("Category: <b>" + d.category + "</b>");
       tooltip.select('.tempRange').html(d.from.toString().substr(4,20) + " TO " + d.to.toString().substr(4,20));
       
       // tooltip.select('.progress').html(d.progress + "% completed");
@@ -170,9 +170,9 @@ var visualizeCal = function(data) {
         dd.from = parseDate2(dd.from);
         dd.to = parseDate2(dd.to);
     });
-    var margin = {top: 50, right: 50, bottom: 50, left: 150},
+    var margin = {top: 50, right: 50, bottom: 0, left: 150},
         width = 2000 - margin.left - margin.right,
-        height = 45;
+        height = 80;
 
     var y2 = d3.scale.ordinal()
         .rangeRoundBands([0, height], .1);
@@ -243,13 +243,16 @@ var visualizeCal = function(data) {
           .enter().append("rect")
           .attr("class", "bar")
           .attr("y", function(dd) { return y2(dd.name); })
-          .attr("height", "20")
+          .attr("height", "10")
           .attr("fill",function(d){
             if(d.status == "busy") {
+              return "#ffcc2e";
+            }
+            else{
               return "#3498df";
             }
           })
-          .attr("transform", "translate(0,8)")
+          .attr("transform", "translate(0,11)")
           .attr("x", function(dd) { return x2(dd.from); })
           .attr("width", function(dd) { return x2(dd.to) - x2(dd.from)});
 
@@ -266,8 +269,8 @@ var visualizeCal = function(data) {
     svg.selectAll(".bar,.pending")
     .on('mouseover', function(d) {
 
-      tooltip.select('.name').html("<b>" + d.name + "</b>");
-      tooltip.select('.task').html("<b> BUSY </b>");
+      tooltip.select('.name').html("<b>" + d.name + " Status: </b>");
+      tooltip.select('.task').html("<b> Work Time </b>");
       tooltip.select('.tempRange').html(d.from.toString().substr(4,20) + " TO " + d.to.toString().substr(4,20));
       
       // tooltip.select('.progress').html(d.progress + "% completed");

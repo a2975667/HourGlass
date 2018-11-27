@@ -1,26 +1,50 @@
 [
     {
-        "name" : "Calendar",
+        "name" : "Work Hour",
         "to": "2018-11-15T10:45:00",
         "from": "2018-11-15T09:30:00",
         "status": "busy"
     },
     {
-        "name" : "Calendar",
+        "name" : "Work Hour",
         "to": "2018-11-15T06:00:00",
         "from": "2018-11-15T01:00:00",
         "status": "busy"
     },
     {
-        "name" : "Calendar",
+        "name" : "Work Hour",
         "to": "2018-11-15T18:30:00",
         "from": "2018-11-15T17:30:00",
         "status": "busy"
     },
     {
-        "name" : "Calendar",
+        "name" : "Work Hour",
         "to": "2018-11-15T23:30:00",
         "from": "2018-11-15T23:50:00",
         "status": "busy"
+    },
+    {
+        "name" : "Non-work Hour",
+        "to": "2018-11-15T09:30:00",
+        "from": "2018-11-15T06:00:00",
+        "status": "free"
+    },
+    {
+        "name" : "Non-work Hour",
+        "to": "2018-11-15T01:00:00",
+        "from": "2018-11-15T00:00:00",
+        "status": "free"
+    },
+    {
+        "name" : "Non-work Hour",
+        "to": "2018-11-15T17:30:00",
+        "from": "2018-11-15T10:45:00",
+        "status": "free"
+    },
+    {
+        "name" : "Non-work Hour",
+        "to": "2018-11-15T24:00:00",
+        "from": "2018-11-15T18:30:00",
+        "status": "free"
     }
 ]
