@@ -51,31 +51,13 @@
 			</div>
 	</div>
 
-	<!-- <div class="graph">
-	<div id="d3id" ></div>
-	</div>
-
-			<div class="progress-summary">
-				<h2>Progress</h2>
-				<h4>Weeks of Goals Met:</h4>
-				<p id="goalMet">0</p>
-				<h4>Highest Number of Distractions</h4>
-				<p id="highest">0</p>
-				<i>/week</i>
-				<h4>Average Number of Distractions</h4>
-				<p id="average">0</p>
-				<i>/week</i>
-				<h4>Lowest Number of Distractions</h4>
-				<p id="lowest">0</p>
-				<i>/week</i>
-		</div> -->
-
 		<script src="https://d3js.org/d3.v4.min.js"></script>
-
 		<script>
 		// current data assumptions: current string tags are start dates to a week. (only titular, does not matter)
 		// The numbers for distraction goals and actual distraction for each week are put into the same entry.
 		// Every entry has a date tag, a goal, and a distraction count. Undefined goals should be 0.
+
+		
 
 		var data = [
 		  {
@@ -216,7 +198,7 @@
 			return total;
 		}
 
-		document.getElementById("goalMet").innerHTML = getGoalsMet() + " /week";
+		document.getElementById("goalMet").innerHTML = getGoalsMet() + " weeks";
 		document.getElementById("highest").innerHTML = getMax() + " /week";
 		document.getElementById("lowest").innerHTML = getMin() + " /week";
 		document.getElementById("average").innerHTML = getAvg() + " /week";
