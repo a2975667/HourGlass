@@ -21,6 +21,27 @@
     background-position: center;
     vertical-align: middle;
 	}
+
+	.boxblue {
+		background-color: #5f66fb;
+  	position: absolute;
+		width: 15px;
+    height: 15px;
+	}
+
+	.boxred {
+		background-color: #fc585a;
+  	position: absolute;
+		width: 15px;
+    height: 15px;
+	}
+
+	.boxyellow {
+		background-color: #fec95a;
+  	position: absolute;
+		width: 15px;
+    height: 15px;
+	}
 </style>
 
 <body>
@@ -34,6 +55,9 @@
 			<div id="graph">
 				<h2> Weekly Overview </h2>
 				<div id="d3id"></div>
+				<p><div class="boxblue"></div><br>Weekly Distractions, Goal Met</p>
+				<p><div class="boxred"></div><br>Weekly Distractions, Goal Not Met</p>
+				<p><div class="boxyellow"></div><br>Weekly Goal</p>
 			</div>
 
 			<div id="wide">
@@ -57,7 +81,7 @@
 		// The numbers for distraction goals and actual distraction for each week are put into the same entry.
 		// Every entry has a date tag, a goal, and a distraction count. Undefined goals should be 0.
 
-		
+
 
 		var data = [
 		  {
@@ -153,8 +177,6 @@
 		svg.append("g")
 		   .attr("class", "y axis")
 		   .call(yAxis);
-
-		// TODO: legend
 
 		// progress statistics
 		function getDistractions() {
