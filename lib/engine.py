@@ -99,3 +99,26 @@ def aggregate(api_key, start_date, end_date, n=10):
         result.append( (sum(time), site))
     result = sorted(result, reverse=True)[:n]
     return result
+
+def get_cal(api_key, calendar, start_date, end_date):
+    delta_day = parser.parse(end_date) - parser.parse(start_date)
+    if delta_day > timedelta(days=5):
+        return {'message':'exceed query limit, please set date range less than 5 days'}
+    string = 'https://www.googleapis.com/calendar/v3/calendars/'+ calendar\
+    + '/events?key=' + api_key + '&timeMin=' + start_date + 'T00:00:00Z&timeMax=' + end_date + 'T00:00:00Z'
+
+    response = get(string).json()
+
+    result = []
+    for item in response['items']:
+        try:
+            if 'dateTime' in item['start']:
+                event = {
+                    'status': 'busy',
+                    'start_time': item['start']['dateTime'],
+                    'end_time': item['end']['dateTime']
+                }
+                result.append(event)
+        except:
+            result = {'message': 'error in get_cal(), contact admin'}
+    return result

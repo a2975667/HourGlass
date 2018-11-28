@@ -7,17 +7,30 @@ from lib.handleError import InvalidUsage
 app = Flask(__name__, static_folder='frontend')
 
 
-def data_request_safe_check(request):
+def data_request_safe_check(request, cal=False):
+    #print(cal)
+    #print(request.headers.get('calendar'))
     api_key = request.headers.get('Key')
+    if cal: 
+        calendar = request.headers.get('calendar')
+    else:
+        calendar = None
+    
     start_date = request.args.get('start_date')
     end_date = request.args.get('end_date')
     if api_key == None:
         raise InvalidUsage('API key not provided', status_code=410)
     elif start_date == None or end_date == None:
         raise InvalidUsage('time not provided', status_code=411)
+    elif cal == True and calendar == None:
+        raise InvalidUsage('calendar not provided', status_code=409)
 
     payload = {'api_key': api_key,
                'start_date': start_date, 'end_date': end_date}
+
+    if cal: 
+        payload['calendar'] = calendar
+
     return payload
 
 @app.route('/')
@@ -72,8 +85,15 @@ def get_rank_aggregate_data():
     response = aggregate(payload.api_key, payload.start_date, payload.end_date)
     return jsonify(response)
 
+@app.route('/api/get-calendar')
+def get_calandar():
+    payload = Munch(data_request_safe_check(request, cal=True))
+    response = get_cal(payload.api_key, payload.calendar, payload.start_date, payload.end_date)
+    return jsonify(response)
+
 @app.errorhandler(InvalidUsage)
 def handle_nokey_usage(error):
     response = jsonify(error.to_dict())
     response.status_code = error.status_code
     return response
+
