@@ -12,6 +12,7 @@
 </head>
 <style>
 </style>
+<<<<<<< HEAD
 
 <body>
     <div class="topnav">
@@ -28,6 +29,26 @@
     </div>
     <div id="container">
     </div>
+=======
+<body>
+  <script>
+    function datetext() {
+      var date = new Date();
+      document.getElementById("date").innerHTML = date.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
+    }
+
+    datetext();
+    setInterval(datetext, 1000);
+  </script>
+  <div class="title">
+    <h2> Hi Johnny Appleseed, </h2>
+	  <h3 id="subtext"> Here is a summary of your online behavior today (<div id="date"></div>) </h3>
+  </div>
+
+  <div id="container">
+  
+  </div>
+>>>>>>> b29288f3df38e1089a45de7cf3b200859d25d544
     <script language="JavaScript" type="text/javascript" src="js/vis.js"></script>
     <div id="nav">
 </body>
