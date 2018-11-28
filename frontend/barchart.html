@@ -1,30 +1,61 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-	<link rel="stylesheet" href="css/style.css" type="text/css" />
-	<style>
-		div {
-			display: inline-block;
-		}
+<!doctype html>
+<html lang="en">
 
-		#left-container {
-			text-align: left;
-		}
+<head>
+    <title>Distractions</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script language="JavaScript" type="text/javascript" src="js/jquery.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="js/d3.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+</head>
 
-		#right-container {
-			text-align: left;
-			line-height: 80%;
-		}
-	</style>
-	<body>
-	<div id="container">
-		<div id="nav">
-	    <h1>HourGlass</h1>
-	  </div>
-			<div id="left-container">
-		    <h2>Weekly Overview</h2>
-				<div id="d3id" ></div>
-		  </div>
-			<div id="right-container">
+<style>
+	#graph {
+		width: 55%;
+		margin-top: 5%;
+		margin-left: 8%;
+    background-size: cover;
+    height: 100vh;
+    background-position: center;
+    vertical-align: middle;
+	}
+</style>
+
+<body>
+	<div class="topnav">
+			<a href="index.html">Visualization</a>
+			<a href="">Settings</a>
+			<a class="active" href="distractions.html">Distractions</a>
+	</div>
+
+	<div id="parent">
+			<div id="graph">
+				<h2> Weekly Overview </h2>
+				<div id="d3id"></div>
+			</div>
+
+			<div id="wide">
+				<div class="textContainer">
+						<h2> Progress </h2>
+						<p>Weeks of Goals Met:</p>
+						<p id="goalMet">0</p>
+						<p>Highest Number of Distractions:</p>
+						<p id="highest">0</p>
+						<p>Average Number of Distractions:</p>
+						<p id="average">0</p>
+						<p>Lowest Number of Distractions:</p>
+						<p id="lowest">0</p>
+				</div>
+			</div>
+	</div>
+
+	<!-- <div class="graph">
+	<div id="d3id" ></div>
+	</div>
+
+			<div class="progress-summary">
 				<h2>Progress</h2>
 				<h4>Weeks of Goals Met:</h4>
 				<p id="goalMet">0</p>
@@ -37,8 +68,7 @@
 				<h4>Lowest Number of Distractions</h4>
 				<p id="lowest">0</p>
 				<i>/week</i>
-			</div>
-		</div>
+		</div> -->
 
 		<script src="https://d3js.org/d3.v4.min.js"></script>
 
@@ -186,9 +216,9 @@
 			return total;
 		}
 
-		document.getElementById("goalMet").innerHTML = getGoalsMet();
-		document.getElementById("highest").innerHTML = getMax();
-		document.getElementById("lowest").innerHTML = getMin();
-		document.getElementById("average").innerHTML = getAvg();
+		document.getElementById("goalMet").innerHTML = getGoalsMet() + " /week";
+		document.getElementById("highest").innerHTML = getMax() + " /week";
+		document.getElementById("lowest").innerHTML = getMin() + " /week";
+		document.getElementById("average").innerHTML = getAvg() + " /week";
 	</script>
 </body>
