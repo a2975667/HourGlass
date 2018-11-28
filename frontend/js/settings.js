@@ -1,5 +1,3 @@
-
-
 // if(localStorage.getItem('')
 // var pull = function(settings){
 // 	localStorage.getItem('productive');
@@ -17,30 +15,43 @@ var unset = [];
 var size;
 // localStorage.setItem('productive',"");
 // localStorage.setItem('non-productive',"");
-
+$("#theverge.com").prop("checked", true);
 function clean(rawData) {
-    console.log("settings test2");
-    var p = localStorage.getItem('productive');
-    var np = localStorage.getItem('non-productive');
-            for (var name in data) {
+        console.log("settings test2");
+        var p = localStorage.getItem('productive');
+        var np = localStorage.getItem('non-productive');
+        for (var name in data) {
             var value = data[name];
-            console.log("if");
+            // console.log("if");
             if (!unset.includes(value.name)) {
-                console.log("appended");
+                // console.log("appended");
                 unset.push(value.name);
             }
         }
         localStorage.setItem('unset', unset);
-    if (localStorage.getItem('productive') == null && localStorage.getItem('non-productive') == null) {
-        console.log("empty");
-        p = [];
-        np = [];
+        size = unset.length;
+        for (var i = 0; i < size; i++) {
+            // $("#form").html('<p>hello</p>');
+            // $('#form').css( "background-color","black" );
+            console.log(unset[i]);
+            $('.form').prepend('<label class="inputLabel">'+unset[i]+'<input type="checkbox" id="'+unset[i]+'"><span class="checkmark"></span></label>');
+        }
+        if (localStorage.getItem('productive') == null && localStorage.getItem('non-productive') == null) {
+            // console.log("empty");
+            p = [];
+            np = [];
+        }
 
-    }
+        else {
+            p = p.split(",");
+            np = np.split(",");
+            console.log(p);
+            console.log(np);
 
-    else {
-    	localStorage.removeItem('productive');
-    	localStorage.removeItem('non-productive');
+            for (var i = 0; i < p.length; i++){
+                console.log(p[i]);
+                document.getElementById(p[i]).checked = true;
+            } 
     	// localStorage.removeItem('unset');
     	
     // 	alert("More shit happening");
@@ -135,7 +146,7 @@ $(document).ready(function() {
 	clean(data);
 	console.log("end of clean");
 	// display(unset);
-    display();
+    // display();
 });
 
 
