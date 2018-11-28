@@ -13,6 +13,7 @@
 
 var today = new Date();
 var day = today.getDate();
+var day2= day+1;
 var month = today.getMonth()+1; //January is 0!
 var year = today.getFullYear();
 
@@ -25,7 +26,7 @@ if(month<10) {
 } 
 
 today = year + '-' + month + '-' + day;
-
+var today2 = year + '-' + month + '-' + day2;
 
 $.ajax({
   type: 'GET',
@@ -42,12 +43,13 @@ $.ajax({
 
 $.ajax({
   type: 'GET',
-  url: '/api/get-calendar?start_date='+today+'&end_date='+today,
+  url: '/api/get-calendar?start_date='+today+'&end_date='+today2,
   headers: { 
     "Key": "AIzaSyBPhqIfGLwvO9srD22V8kLXAd3p58PxdjQ",
     "calendar": "a2975667@gmail.com"
   },
   success: function(data) {
+    console.log(data);
     visualizeCal(data); 
   },
   error: function() {
@@ -215,11 +217,11 @@ var visualize = function(data) {
 
 var visualizeCal = function(data) {
  // var parseDate = d3.time.format("%H-%M-%S").parse;
-    var parseDate2 = d3.time.format("%Y-%m-%dT%H:%M:%S").parse;
+    var parseDate2 = d3.time.format("%Y-%m-%dT%H:%M:%S-06:00").parse;
 
     data.forEach(function(dd) {
-        dd.from = parseDate2(dd.from);
-        dd.to = parseDate2(dd.to);
+        dd.from = parseDate2(dd.start_time);
+        dd.to = parseDate2(dd.end_time);
     });
     var margin = {top: 50, right: 50, bottom: 20, left: 150},
         width = 1500 - margin.left - margin.right,
