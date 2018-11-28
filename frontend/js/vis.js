@@ -28,7 +28,7 @@ var visualize = function(data) {
         d.to = parseDate(d.to);
     });
     var margin = {top: 0, right: 50, bottom: 50, left: 150},
-        width = 2000 - margin.left - margin.right,
+        width = 1500 - margin.left - margin.right,
         height = 450 - margin.top - margin.bottom;
 
     var y = d3.scale.ordinal()
@@ -171,7 +171,7 @@ var visualizeCal = function(data) {
         dd.to = parseDate2(dd.to);
     });
     var margin = {top: 50, right: 50, bottom: 20, left: 150},
-        width = 2000 - margin.left - margin.right,
+        width = 1500 - margin.left - margin.right,
         height = 80;
 
     var y2 = d3.scale.ordinal()

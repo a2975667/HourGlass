@@ -61,6 +61,7 @@ def sort_by_time(api_key, start_date, end_date, n=10, summary=False):
 
 def sort_by_time_for_d3(api_key, start_date, end_date, n=10):
     data = raw_query(api_key, start_date, end_date)
+    good_result, bad_result = get_working_hours(data['rows'], [], [])
     time_dict = defaultdict(lambda: {})
     for d in data['rows']:
         if '.' not in d[3]:
@@ -81,14 +82,67 @@ def sort_by_time_for_d3(api_key, start_date, end_date, n=10):
             lst += [event]
             info = (event[2], event[0], (parser.parse(event[0]) + timedelta(0,event[1])).isoformat(), event[3])
             distractions[event[2]].append(info)
-
     intermediate = sorted([(len(distractions[x]), x) for x in distractions], reverse=True)[:n]
-    results = []
+    results = [] + good_result + bad_result
     for site in intermediate:
         meta = [{'category': list(x)[3],'name': list(x)[0], 'from': list(x)[1], 'to': list(x)[2]} for x in distractions[site[1]]]
-        #pprint(meta)
         results += meta
     return results
+
+def get_working_hours(raw_data, good, bad):
+    good = []
+    bad = ['Instant Message', 
+    'General Entertainment',
+    'General News & Opinion',
+    'Video',
+    'Music',
+    'Games',
+    'Comedy',
+    'Photos',
+    'Sports',
+    'Society',
+    'General',
+    'Regional',
+    'Business',
+    'Electronics',
+    'International',
+    'Entertainment',
+    'General Shopping',
+    'Travel & Outdoors',
+    'Clothes & Personal',
+    'Science & Technology']
+
+    good_timesheet = defaultdict(lambda: [])
+    bad_timesheet = defaultdict(lambda: [])
+    for data in raw_data:
+        # exceptions
+        if data[3] in ['system idle process']:
+            continue
+        if data[4] in bad:
+            bad_timesheet[data[0]].append(data)
+        else:
+            good_timesheet[data[0]].append(data)
+    
+    bad_result = restructure_timesheet(bad_timesheet, 'unproductive')
+    good_result = restructure_timesheet(good_timesheet, 'productive')
+    return good_result, bad_result
+
+def restructure_timesheet(timesheet, name):
+    return_list = []
+    for key in timesheet:
+        start_time = key
+        end_time = sum([event[1] for event in timesheet[key]])
+        end_time = (parser.parse(start_time) + timedelta(0,end_time)).isoformat()
+        site_name = ', '.join([event[3] for event in timesheet[key]])
+        dictionary = {
+            'category': '',
+            "from":start_time,
+            "to":end_time,
+            'name': name,
+            "info":site_name
+        }
+        return_list.append(dictionary)
+    return return_list
 
 def aggregate(api_key, start_date, end_date, n=10):
     data = query(api_key, start_date, end_date)
