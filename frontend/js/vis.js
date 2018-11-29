@@ -246,10 +246,10 @@ var visualizeCal = function(data) {
           .attr("height", "10")
           .attr("fill",function(d){
             if(d.status == "busy") {
-              return "#ffcc2e";
+              return "#333";
             }
             else{
-              return "#3498df";
+              return "#aaa";
             }
           })
           .attr("transform", "translate(0,11)")
