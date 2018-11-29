@@ -1,23 +1,74 @@
 // Asks JavaScript to show more errors.
 "use strict";
 
+// $(function() {
+//     $.getJSON("js/projects.json")
+//         .done(function(data) {
+//         alert(data); 
+//         localStorage.setItem('key',JSON.stringify(data));
+//           visualize(data); })
+//         .fail(function() { alert("Failed to load the JSON file!\n(Did your Python run?)"); });
+// });
+// PULLING FROM FILE
+
+var today = new Date();
+var day = today.getDate();
+var month = today.getMonth()+1; //January is 0!
+var year = today.getFullYear();
+
+if(day<10) {
+    day = '0'+day
+} 
+
+if(month<10) {
+    month = '0'+month
+} 
+
+today = year + '-' + month + '-' + day;
 
 
-$(function() {
-    $.getJSON("js/projects.json")
-        .done(function(data) { 
-        localStorage.setItem('key',JSON.stringify(data));
-          visualize(data); })
-        .fail(function() { alert("Failed to load the JSON file!\n(Did your Python run?)"); });
+$.ajax({
+  type: 'GET',
+  url: 'http://hourglass-api.herokuapp.com/api/rank-distract-for-d3?start_date='+today+'&end_date='+today+'&n=5',
+  headers: { 'key': 'B63TuW7oKpBKsoZePpZ31IGZkxtEKuUVTcYQeJRz' },
+  success: function(data) {
+    localStorage.setItem('key',JSON.stringify(data));
+    visualize(data); 
+  },
+  error: function() {
+      alert('error pulling Visualization code from API');
+  }
 });
 
-$(function() {
-    $.getJSON("js/calData.json")
-        .done(function(data) { 
-        // localStorage.setItem('key',JSON.stringify(data));
-          visualizeCal(data); })
-        .fail(function() { alert("Failed to load the JSON file!\n(Did your Python run?)"); });
+$.ajax({
+  type: 'GET',
+  url: 'https://hourglass-api.herokuapp.com/api/get-calendar?start_date='+today+'&end_date='+today,
+  headers: { 
+    "Key": "AIzaSyBPhqIfGLwvO9srD22V8kLXAd3p58PxdjQ",
+    "calendar": "a2975667@gmail.com"
+  },
+  success: function(data) {
+    visualizeCal(data); 
+  },
+  error: function() {
+      alert('error pulling Calendar code from API');
+  }
 });
+
+// $(function() {
+//     $.getJSON("js/calData.json")
+//         .done(function(data) { 
+//         // localStorage.setItem('key',JSON.stringify(data));
+//           visualizeCal(data); })
+//         .fail(function() { alert("Failed to load the JSON file!\n(Did your Python run?)"); });
+// });
+
+// #Google Calendar API Key and Calendar Key:
+// "Key": "AIzaSyBPhqIfGLwvO9srD22V8kLXAd3p58PxdjQ"
+// "calendar": "a2975667@gmail.com"
+
+// https://hourglass-api.herokuapp.com/api/get-calendar?start_date=2018-11-20&end_date=2018-11-25
+
 
 var visualize = function(data) {
  // var parseDate = d3.time.format("%H-%M-%S").parse;
@@ -246,10 +297,10 @@ var visualizeCal = function(data) {
           .attr("height", "10")
           .attr("fill",function(d){
             if(d.status == "busy") {
-              return "#ffcc2e";
+              return "#333";
             }
             else{
-              return "#3498df";
+              return "#aaa";
             }
           })
           .attr("transform", "translate(0,11)")

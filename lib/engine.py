@@ -168,6 +168,7 @@ def get_cal(api_key, calendar, start_date, end_date):
         try:
             if 'dateTime' in item['start']:
                 event = {
+                    "name" : "Work Hour",
                     'status': 'busy',
                     'start_time': item['start']['dateTime'],
                     'end_time': item['end']['dateTime']
@@ -175,4 +176,57 @@ def get_cal(api_key, calendar, start_date, end_date):
                 result.append(event)
         except:
             result = {'message': 'error in get_cal(), contact admin'}
+
+    list_of_unavaliable_time = sorted([(event['start_time'], event['end_time']) for event in result])
+    
+    # cut = True
+    # while(cut):
+    #     for index in range(len(list_of_unavaliable_time)-1):
+    #         print(index)
+    #         if list_of_unavaliable_time[index][1] > list_of_unavaliable_time[index+1][0]:
+    #             cut = True
+    #             list_of_unavaliable_time[index][1] = list_of_unavaliable_time[index+1][1]
+    #             del list_of_unavaliable_time[index]
+    #             break
+    #         if index == len(list_of_unavaliable_time):
+    #             cut = False
+    
+    # pprint(list_of_unavaliable_time)
+    list_of_unavaliable_time = [time for time in merge(list_of_unavaliable_time)]
+    
+    start = parser.parse(list_of_unavaliable_time[0][0]).replace(hour=0,minute=0).isoformat()
+    end = parser.parse(list_of_unavaliable_time[-1][1]).replace(hour=0,minute=0).isoformat()
+
+    list_of_unavaliable_time = [(start,start)] + list_of_unavaliable_time + [(end,end)]
+    avaliable_time = []
+
+
+    # pprint(list_of_unavaliable_time)
+    #print(parser.parse(list_of_unavaliable_time[0][0]))
+    #print(parser.parse(list_of_unavaliable_time[0][0]).replace(hour=0,minute=0))
+    # print(parse(list_of_unavaliable_time[0]).date)
+
+    for index in range(len(list_of_unavaliable_time)-1):
+        start, end = list_of_unavaliable_time[index][1], list_of_unavaliable_time[index+1][0]
+        event = {
+            "name" : "Non-Work Hour",
+            'status': 'free',
+            'start_time': start,
+            'end_time': end
+        }
+        avaliable_time.append(event)
+
+    result += avaliable_time
+
     return result
+
+def merge(times):
+    saved = list(times[0])
+    for st, en in sorted([sorted(t) for t in times]):
+        if st <= saved[1]:
+            saved[1] = max(saved[1], en)
+        else:
+            yield tuple(saved)
+            saved[0] = st
+            saved[1] = en
+    yield tuple(saved)

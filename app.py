@@ -1,11 +1,12 @@
 from flask import Flask, jsonify, request, send_from_directory, redirect
 from munch import Munch
+from flask_cors import CORS
 
 from lib.engine import *
 from lib.handleError import InvalidUsage
 
 app = Flask(__name__, static_folder='frontend')
-
+CORS(app)
 
 def data_request_safe_check(request, cal=False):
     #print(cal)
