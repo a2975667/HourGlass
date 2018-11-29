@@ -95,45 +95,50 @@ function display() {
 
 function submit() {
 	alert("Settings Submitted!");
-	var p = localStorage.getItem('productive');
-    var np = localStorage.getItem('non-productive');
+	// var p = localStorage.getItem('productive');
+ //    var np = localStorage.getItem('non-productive');
+    var p = [];
+    var np = [];
 	for (var i = 0; i < unset.length; i++) {
 		// alert(unset[i]+" was set to true");
 		// alert($('#google.com').is(":checked"));
 		if (document.getElementById(unset[i]).checked) {
             // alert("checked");
-            if(localStorage.getItem('productive') == null){
-            	var p = [];
+            // if(localStorage.getItem('productive') == null){
             	p.push(unset[i]);
             	localStorage.setItem('productive',p);
-            }
-            else {
-            	var p = localStorage.getItem('productive');
-            	// var p2 = JSON.parse(p);
-            	// if(typeof p === "string") {
-            	// 	var p2=[]
-            	// }
-            	var p2 = [];
-            	p2.push(p);
-            	p2.push(unset[i]);
-            	localStorage.setItem('productive',p2);
-            }
+            // }
+            // else {
+            // 	// var p = localStorage.getItem('productive');
+            // 	// var p2 = JSON.parse(p);
+            // 	// if(typeof p === "string") {
+            // 	// 	var p2=[]
+            // 	// }
+            //     // alert(p);
+            // 	var p2 = [];
+            // 	// p2.push(p);
+            //     // alert(p2);
+            // 	p2.push(unset[i]);
+            //     alert(p2);
+            //     // localStorage.removeItem('productive');
+            // 	localStorage.setItem('productive',p2);
+            // }
     	}
     	else{
     		// alert("unchecked");
-    		if(localStorage.getItem('non-productive') == null){
-            	var np = [];
+    		// if(localStorage.getItem('non-productive') == null){
             	np.push(unset[i]);
             	localStorage.setItem('non-productive',np);
-            }
-            else {
-            	var np = localStorage.getItem('non-productive');
-            	// var np2 = JSON.parse(np);
-            	var np2 = [];
-            	np2.push(np);
-            	np2.push(unset[i]);
-            	localStorage.setItem('non-productive',np2);
-            }
+            // }
+            // else {
+            // 	var np = localStorage.getItem('non-productive');
+            // 	// var np2 = JSON.parse(np);
+            // 	var np2 = [];
+            // 	np2.push(np);
+            // 	np2.push(unset[i]);
+            //     // localStorage.removeItem('non-productive');
+            // 	localStorage.setItem('non-productive',np2);
+            // }
     	}
     	// alert("next");
 
