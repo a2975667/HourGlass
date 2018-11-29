@@ -2,13 +2,26 @@
 "use strict";
 
 
-
-$(function() {
-    $.getJSON("js/projects.json")
-        .done(function(data) { 
-        localStorage.setItem('key',JSON.stringify(data));
-          visualize(data); })
-        .fail(function() { alert("Failed to load the JSON file!\n(Did your Python run?)"); });
+// $(function() {
+//     $.getJSON("js/projects.json")
+//         .done(function(data) {
+//         alert(data); 
+//         localStorage.setItem('key',JSON.stringify(data));
+//           visualize(data); })
+//         .fail(function() { alert("Failed to load the JSON file!\n(Did your Python run?)"); });
+// });
+$.ajax({
+  type: 'GET',
+  url: '/api/rank-distract-for-d3?start_date=2018-11-05&end_date=2018-11-07&n=5',
+  headers: { 'key': 'B63mVDYNd_2h9n4dbHjgrjMyNBCjVdZUOH5luFCE' },
+  success: function(data) {
+    alert(data); 
+    localStorage.setItem('key',JSON.stringify(data));
+    visualize(data); 
+  },
+  error: function() {
+      alert('error pulling code from API');
+  }
 });
 
 $(function() {
@@ -18,6 +31,7 @@ $(function() {
           visualizeCal(data); })
         .fail(function() { alert("Failed to load the JSON file!\n(Did your Python run?)"); });
 });
+
 
 var visualize = function(data) {
  // var parseDate = d3.time.format("%H-%M-%S").parse;

@@ -1,6 +1,4 @@
-<!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
 <head>
     <title>Gantt Chart</title>
     <meta charset="utf-8" />
@@ -8,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <script language="JavaScript" type="text/javascript" src="js/jquery.min.js"></script>
     <script language="JavaScript" type="text/javascript" src="js/d3.js"></script>
+    <script src="js/date.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 </head>
 <style>
@@ -21,10 +20,14 @@
     </div>
     <div class="title">
         <!--     <a href="settings.html">
-      <img src="css/settings.png" id="settings">
-    </a> -->
-        <h2> Hi Johnny Appleseed, </h2>
-        <h3 id="subtext"> Here is a summary of your online behavior today (Thursday November 15) </h3>
+        <img src="css/settings.png" id="settings">
+        </a> -->
+        <h2>Hi Johnny Appleseed</h2>
+        <h3 id="subtext">Here is a summary of your online behavior today.</h3>
+        <h3 id="date_text"></h3>
+        <script>
+            datetext();
+        </script>
     </div>
     <div id="container">
     </div>
