@@ -42,7 +42,7 @@ $.ajax({
 
 $.ajax({
   type: 'GET',
-  url: 'https://hourglass-api.herokuapp.com/api/get-calendar?start_date=2018-11-20&end_date=2018-11-25',
+  url: 'https://hourglass-api.herokuapp.com/api/get-calendar?start_date='+today+'&end_date='+today,
   headers: { 
     "Key": "AIzaSyBPhqIfGLwvO9srD22V8kLXAd3p58PxdjQ",
     "calendar": "a2975667@gmail.com"
