@@ -14,8 +14,7 @@ $.ajax({
   type: 'GET',
   url: '/api/rank-distract-for-d3?start_date=2018-11-05&end_date=2018-11-07&n=5',
   headers: { 'key': 'B63mVDYNd_2h9n4dbHjgrjMyNBCjVdZUOH5luFCE' },
-  success: function(data) {
-    alert(data); 
+  success: function(data) { 
     localStorage.setItem('key',JSON.stringify(data));
     visualize(data); 
   },
