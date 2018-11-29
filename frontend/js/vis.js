@@ -300,10 +300,10 @@ var visualizeCal = function(data) {
           .attr("height", "10")
           .attr("fill",function(d){
             if(d.status == "busy") {
-              return "#333";
+              return "#3498df";
             }
             else{
-              return "#aaa";
+              return "#ffcc2e";
             }
           })
           .attr("transform", "translate(0,11)")
