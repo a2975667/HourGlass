@@ -195,7 +195,7 @@ def get_cal(api_key, calendar, start_date, end_date):
     list_of_unavaliable_time = [time for time in merge(list_of_unavaliable_time)]
     
     start = parser.parse(list_of_unavaliable_time[0][0]).replace(hour=0,minute=0).isoformat()
-    end = parser.parse(list_of_unavaliable_time[-1][1]).replace(hour=0,minute=0).isoformat()
+    end = parser.parse(list_of_unavaliable_time[-1][1]).replace(hour=23,minute=59).isoformat()
 
     list_of_unavaliable_time = [(start,start)] + list_of_unavaliable_time + [(end,end)]
     avaliable_time = []
