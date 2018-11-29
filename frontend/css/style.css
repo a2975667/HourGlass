@@ -108,7 +108,8 @@ h3 {
     flex-direction: column;
     align-content: center;
     align-items: center;
-    padding-top: 150px;
+        padding-top: 120px;
+    padding-left:50px;
 }
 
 .tooltip {
