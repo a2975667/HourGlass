@@ -12,7 +12,8 @@
 // PULLING FROM FILE
 
 var today = new Date();
-var day = today.getDate();
+// var day = today.getDate()-1;
+var day = 27;
 var day2= day+1;
 var month = today.getMonth()+1; //January is 0!
 var year = today.getFullYear();
@@ -27,12 +28,12 @@ if(month<10) {
 
 today = year + '-' + month + '-' + day;
 var today2 = year + '-' + month + '-' + day2;
-
 $.ajax({
   type: 'GET',
-  url: '/api/rank-distract-for-d3?start_date='+today+'&end_date='+today+'&n=5',
+  url: 'https://hourglass-api.herokuapp.com/api/rank-distract-for-d3?start_date='+today+'&end_date='+today+'&n=5',
   headers: { 'key': 'B63TuW7oKpBKsoZePpZ31IGZkxtEKuUVTcYQeJRz' },
   success: function(data) {
+    console.log(data);
     localStorage.setItem('key',JSON.stringify(data));
     visualize(data); 
   },
@@ -43,7 +44,7 @@ $.ajax({
 
 $.ajax({
   type: 'GET',
-  url: '/api/get-calendar?start_date='+today+'&end_date='+today2,
+  url: 'https://hourglass-api.herokuapp.com/api/get-calendar?start_date='+today+'&end_date='+today2,
   headers: { 
     "Key": "AIzaSyBPhqIfGLwvO9srD22V8kLXAd3p58PxdjQ",
     "calendar": "a2975667@gmail.com"
@@ -80,7 +81,7 @@ var visualize = function(data) {
         d.from = parseDate(d.from);
         d.to = parseDate(d.to);
     });
-    var margin = {top: 0, right: 50, bottom: 50, left: 150},
+    var margin = {top: 0, right: 50, bottom: 50, left: 180},
         width = 1500 - margin.left - margin.right,
         height = 450 - margin.top - margin.bottom;
 
@@ -186,7 +187,7 @@ var visualize = function(data) {
 
     tooltip.append('div').attr('class', 'name');
     tooltip.append('div').attr('class', 'category')
-    tooltip.append('div').attr('class', 'tempRange');
+    tooltip.append('div').attr('class', 'ran');
     // tooltip.append('div').attr('class', 'progress');
 
     svg.selectAll(".bar,.pending")
@@ -194,7 +195,7 @@ var visualize = function(data) {
 
       tooltip.select('.name').html("Site: <b>" + d.name + "</b>");
       tooltip.select('.category').html("Category: <b>" + d.category + "</b>");
-      tooltip.select('.tempRange').html(d.from.toString().substr(4,20) + " TO " + d.to.toString().substr(4,20));
+      tooltip.select('.ran').html(d.from.toString().substr(4,20) + " TO " + d.to.toString().substr(4,20));
       
       // tooltip.select('.progress').html(d.progress + "% completed");
 
@@ -223,7 +224,7 @@ var visualizeCal = function(data) {
         dd.from = parseDate2(dd.start_time);
         dd.to = parseDate2(dd.end_time);
     });
-    var margin = {top: 50, right: 50, bottom: 20, left: 150},
+    var margin = {top: 50, right: 50, bottom: 20, left: 180},
         width = 1500 - margin.left - margin.right,
         height = 80;
 
@@ -314,7 +315,7 @@ var visualizeCal = function(data) {
     .append('div')
     .attr('class', 'tooltip');
 
-    tooltip.append('div').attr('class', 'name');
+    tooltip.append('div').attr('class', 'cat');
     tooltip.append('div').attr('class', 'status')
     tooltip.append('div').attr('class', 'tempRange');
     // tooltip.append('div').attr('class', 'progress');
@@ -322,7 +323,7 @@ var visualizeCal = function(data) {
     svg.selectAll(".bar,.pending")
     .on('mouseover', function(d) {
 
-      tooltip.select('.name').html("Status: <b>" + d.name + "</b>");
+      tooltip.select('.cat').html("Status: <b>" + d.name + "</b>");
       // tooltip.select('.status').html("<b> + d.name </b>");
       tooltip.select('.tempRange').html(d.from.toString().substr(4,20) + " TO " + d.to.toString().substr(4,20));
       
