@@ -29,7 +29,7 @@ today = year + '-' + month + '-' + day;
 
 $.ajax({
   type: 'GET',
-  url: 'http://hourglass-api.herokuapp.com/api/rank-distract-for-d3?start_date='+today+'&end_date='+today+'&n=5',
+  url: '/api/rank-distract-for-d3?start_date='+today+'&end_date='+today+'&n=5',
   headers: { 'key': 'B63TuW7oKpBKsoZePpZ31IGZkxtEKuUVTcYQeJRz' },
   success: function(data) {
     localStorage.setItem('key',JSON.stringify(data));
@@ -42,7 +42,7 @@ $.ajax({
 
 $.ajax({
   type: 'GET',
-  url: 'https://hourglass-api.herokuapp.com/api/get-calendar?start_date='+today+'&end_date='+today,
+  url: '/api/get-calendar?start_date='+today+'&end_date='+today,
   headers: { 
     "Key": "AIzaSyBPhqIfGLwvO9srD22V8kLXAd3p58PxdjQ",
     "calendar": "a2975667@gmail.com"
