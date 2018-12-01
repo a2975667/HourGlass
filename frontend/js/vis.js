@@ -109,7 +109,7 @@ var visualize = function(data) {
         // .attr("fill","none")
         .orient("left");
 
-    var svg = d3.select("#container").append("svg")
+    var svg = d3.select("#index_gantt_graph").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -181,7 +181,7 @@ var visualize = function(data) {
           .attr("width", function(d) { return x(d.to) - x(d.from)});
 
 
-    var tooltip = d3.select("#container")
+    var tooltip = d3.select("#index_gantt_graph")
     .append('div')
     .attr('class', 'tooltip');
 
@@ -252,7 +252,7 @@ var visualizeCal = function(data) {
         // .attr("fill","none")
         .orient("left");
 
-    var svg = d3.select("#container").append("svg")
+    var svg = d3.select("#index_calendar_graph").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -311,7 +311,7 @@ var visualizeCal = function(data) {
           .attr("width", function(dd) { return x2(dd.to) - x2(dd.from)});
 
 
-    var tooltip = d3.select("#container")
+    var tooltip = d3.select("#index_calendar_graph")
     .append('div')
     .attr('class', 'tooltip');
 
