@@ -76,10 +76,11 @@ def get_rank_distract_data_for_d3():
 
 
 @app.route('/api/pro-nonpro-time')
-def get_productive_unproductive_time():
+def get_pro_nonpro_time():
     payload = Munch(data_request_safe_check(request))
     response = get_productive_unproductive_time(payload.api_key, payload.start_date, payload.end_date)
     return jsonify(response)
+
 
 
 @app.route('/api/summary/rank-distract')
