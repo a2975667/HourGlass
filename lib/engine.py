@@ -89,6 +89,12 @@ def sort_by_time_for_d3(api_key, start_date, end_date, n=10):
         results += meta
     return results
 
+def get_productive_unproductive_time(api_key, start_date, end_date):
+    data = raw_query(api_key, start_date, end_date)
+    good_result, bad_result = get_working_hours(data['rows'], [], [])
+    results = good_result + bad_result
+    return results
+
 def get_working_hours(raw_data, good, bad):
     good = []
     bad = ['Instant Message', 
@@ -178,20 +184,7 @@ def get_cal(api_key, calendar, start_date, end_date):
             result = {'message': 'error in get_cal(), contact admin'}
 
     list_of_unavaliable_time = sorted([(event['start_time'], event['end_time']) for event in result])
-    
-    # cut = True
-    # while(cut):
-    #     for index in range(len(list_of_unavaliable_time)-1):
-    #         print(index)
-    #         if list_of_unavaliable_time[index][1] > list_of_unavaliable_time[index+1][0]:
-    #             cut = True
-    #             list_of_unavaliable_time[index][1] = list_of_unavaliable_time[index+1][1]
-    #             del list_of_unavaliable_time[index]
-    #             break
-    #         if index == len(list_of_unavaliable_time):
-    #             cut = False
-    
-    # pprint(list_of_unavaliable_time)
+
     list_of_unavaliable_time = [time for time in merge(list_of_unavaliable_time)]
     
     start = parser.parse(list_of_unavaliable_time[0][0]).replace(hour=0,minute=0).isoformat()
@@ -199,12 +192,6 @@ def get_cal(api_key, calendar, start_date, end_date):
 
     list_of_unavaliable_time = [(start,start)] + list_of_unavaliable_time + [(end,end)]
     avaliable_time = []
-
-
-    # pprint(list_of_unavaliable_time)
-    #print(parser.parse(list_of_unavaliable_time[0][0]))
-    #print(parser.parse(list_of_unavaliable_time[0][0]).replace(hour=0,minute=0))
-    # print(parse(list_of_unavaliable_time[0]).date)
 
     for index in range(len(list_of_unavaliable_time)-1):
         start, end = list_of_unavaliable_time[index][1], list_of_unavaliable_time[index+1][0]
