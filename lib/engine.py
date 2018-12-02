@@ -83,7 +83,7 @@ def sort_by_time_for_d3(api_key, start_date, end_date, n=10):
             info = (event[2], event[0], (parser.parse(event[0]) + timedelta(0,event[1])).isoformat(), event[3])
             distractions[event[2]].append(info)
     intermediate = sorted([(len(distractions[x]), x) for x in distractions], reverse=True)[:n]
-    results = [] + good_result + bad_result
+    results = [] # + good_result + bad_result
     for site in intermediate:
         meta = [{'category': list(x)[3],'name': list(x)[0], 'from': list(x)[1], 'to': list(x)[2]} for x in distractions[site[1]]]
         results += meta
