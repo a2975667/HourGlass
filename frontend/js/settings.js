@@ -50,11 +50,11 @@ function clean(rawData) {
             } 
         if (localStorage.getItem('calKey') == null) {
             alert("You haven't set up your Calender API yet!");
-            window.location.href = "signup.html";
+            // window.location.href = "signup.html";
         }
-        if (localStorage.getItem('calKey') == null) {
+        if (localStorage.getItem('rtKey') == null) {
             alert("You haven't set up your RescueTime API yet!");
-            window.location.href = "signup.html";
+            // window.location.href = "signup.html";
         }
 
     }
@@ -90,21 +90,28 @@ function submit() {
     	else{
             	np.push(unset[i]);
             	localStorage.setItem('non-productive',np);
-           
     	}
 
 	}
 	localStorage.removeItem("unset");
-    var calKey = $.trim($("#calKey").val());
-    var rtKey = document.getElementById("rtKey").value;
-    // calKey = 
-    alert(calKey);
-    if (calKey.length>0) {
-        localStorage.setItem('calKey',calKey);
+
+    /**** Storing API Keys ****/
+    var calKey = $.trim($("#calKey").val()); // Pulling the value of the key from the ID Tag and trimming the whitespaces.
+    var rtKey = document.getElementById("rtKey").value; 
+    if (calKey.length>0) { // If length of string is > 0.
+        localStorage.setItem('calKey',calKey); // Stores the variable "calKey" into localStorage, the key to access this in localStorage is also called calKey.
     }
     if (rtKey.length>0) {
         localStorage.setItem('rtKey',rtKey);
     }
+    /*
+    To check what's in localStorage. 
+    Right-click in chrome and go under 
+    the applications tab. There's a 
+    "localStorage" section where you 
+    can see what is currently in local 
+    storage, and clear.
+    */
 }
 
 
