@@ -5,9 +5,6 @@
 // }
 
 
-// document.getElementById("clickMe").onclick = function () { alert('hello!'); };
-
-// $("form").append('<p>hello</p>');
 
 var data = JSON.parse(localStorage.getItem('key'));
 
@@ -34,14 +31,13 @@ function clean(rawData) {
             // $("#form").html('<p>hello</p>');
             // $('#form').css( "background-color","black" );
             console.log(unset[i]);
-            $('.form').prepend('<label class="inputLabel">'+unset[i]+'<input type="checkbox" id="'+unset[i]+'"><span class="checkmark"></span></label>');
+            $('#form').append('<label class="inputLabel">'+unset[i]+'<input type="checkbox" id="'+unset[i]+'"><span class="checkmark"></span></label>');
         }
         if (localStorage.getItem('productive') == null && localStorage.getItem('non-productive') == null) {
             // console.log("empty");
             p = [];
             np = [];
         }
-
         else {
             p = p.split(",");
             np = np.split(",");
@@ -52,31 +48,15 @@ function clean(rawData) {
                 console.log(p[i]);
                 document.getElementById(p[i]).checked = true;
             } 
-    	// localStorage.removeItem('unset');
-    	
-    // 	alert("More shit happening");
-    // 	var p = p.split();
-    // 	var np = np.split();
-    // 	for (var i = 0; i < unset.length; i++) {
-	 		// if(p.includes(unset[i])){
-	 		// 	localStorage.removeItem(unset[i]);
-	 		// }
-    // 	}
-    	// // var np = JSON.parse(np);
-     //    for (var name in data) {
-     //        var value = data[name];
-     //        if (!p.includes(value.name)) {
-     //            // console.log("appended");
-     //            unset.push(value.name);
-     //        }
-     //    }
-     //    for (var name in data) {
-     //        var value = data[name];
-     //        if (!p.includes(value.name)) {
-     //            // console.log("appended");
-     //            unset.push(value.name);
-     //        }
-     //    }
+        if (localStorage.getItem('calKey') == null) {
+            alert("You haven't set up your Calender API yet!");
+            window.location.href = "signup.html";
+        }
+        if (localStorage.getItem('calKey') == null) {
+            alert("You haven't set up your RescueTime API yet!");
+            window.location.href = "signup.html";
+        }
+
     }
 }
 
@@ -88,7 +68,7 @@ function display() {
 		// $("#form").html('<p>hello</p>');
 		// $('#form').css( "background-color","black" );
 		console.log(unset[i]);
-		$('.form').prepend('<label class="inputLabel">'+unset[i]+'<input type="checkbox" id="'+unset[i]+'"><span class="checkmark"></span></label>');
+		$('#form').prepend('<label class="inputLabel">'+unset[i]+'<input type="checkbox" id="'+unset[i]+'"><span class="checkmark"></span></label>');
 	}
 }
 
@@ -103,53 +83,33 @@ function submit() {
 		// alert(unset[i]+" was set to true");
 		// alert($('#google.com').is(":checked"));
 		if (document.getElementById(unset[i]).checked) {
-            // alert("checked");
-            // if(localStorage.getItem('productive') == null){
             	p.push(unset[i]);
             	localStorage.setItem('productive',p);
-            // }
-            // else {
-            // 	// var p = localStorage.getItem('productive');
-            // 	// var p2 = JSON.parse(p);
-            // 	// if(typeof p === "string") {
-            // 	// 	var p2=[]
-            // 	// }
-            //     // alert(p);
-            // 	var p2 = [];
-            // 	// p2.push(p);
-            //     // alert(p2);
-            // 	p2.push(unset[i]);
-            //     alert(p2);
-            //     // localStorage.removeItem('productive');
-            // 	localStorage.setItem('productive',p2);
-            // }
+
     	}
     	else{
-    		// alert("unchecked");
-    		// if(localStorage.getItem('non-productive') == null){
             	np.push(unset[i]);
             	localStorage.setItem('non-productive',np);
-            // }
-            // else {
-            // 	var np = localStorage.getItem('non-productive');
-            // 	// var np2 = JSON.parse(np);
-            // 	var np2 = [];
-            // 	np2.push(np);
-            // 	np2.push(unset[i]);
-            //     // localStorage.removeItem('non-productive');
-            // 	localStorage.setItem('non-productive',np2);
-            // }
+           
     	}
-    	// alert("next");
 
 	}
 	localStorage.removeItem("unset");
+    var calKey = $.trim($("#calKey").val());
+    var rtKey = document.getElementById("rtKey").value;
+    // calKey = 
+    alert(calKey);
+    if (calKey.length>0) {
+        localStorage.setItem('calKey',calKey);
+    }
+    if (rtKey.length>0) {
+        localStorage.setItem('rtKey',rtKey);
+    }
 }
 
 
 $(document).ready(function() {
 	clean(data);
-	console.log("end of clean");
 	// display(unset);
     // display();
 });

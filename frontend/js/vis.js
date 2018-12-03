@@ -102,7 +102,7 @@ var visualize = function(data) {
     });
     var margin = {top: 0, right: 50, bottom: 50, left: 180},
         width = 1500 - margin.left - margin.right,
-        height = 450 - margin.top - margin.bottom;
+        height = 380 - margin.top - margin.bottom;
 
     var y = d3.scale.ordinal()
         .rangeRoundBands([0, height], .1);
@@ -118,14 +118,12 @@ var visualize = function(data) {
         .ticks(10).outerTickSize(0)
         .tickSize(0)
         .tickPadding(10)
-        // .attr("font-size","4em")
         .tickFormat(d3.time.format("%H %p"));
 
     var yAxis = d3.svg.axis()
         .scale(y)
         .tickSize(0)
         .tickPadding(10)
-        // .attr("fill","none")
         .orient("left");
 
     var svg = d3.select("#index_gantt_graph").append("svg")
@@ -171,7 +169,7 @@ var visualize = function(data) {
             var p = localStorage.getItem('productive');
             var np = localStorage.getItem('non-productive');
             if(p==null || np == null)
-                return "#444";
+                return "#3498df";
             p = p.split(",");
             np = np.split(",");
             for(var i = 0 ; i < p.length; i++){
@@ -184,18 +182,8 @@ var visualize = function(data) {
                 return "#3498df";
               }
             }
-
-            // if(d.task == "on") {
-            //   return "#ffcc2e";
-            // }
-            // else if(d.task == "off") {
-            //   return "#3498df";
-            // }
-            // else {
-            //   return "#444";
-            // }
           })
-          .attr("transform", "translate(0,13)")
+          .attr("transform", "translate(0,9)")
           .attr("x", function(d) { return x(d.from); })
           .attr("width", function(d) { return x(d.to) - x(d.from)});
 
@@ -242,7 +230,7 @@ var visualizeProductivity = function(data) {
         d.from = parseDate(d.from);
         d.to = parseDate(d.to);
     });
-    var margin = {top: 0, right: 50, bottom: 50, left: 180},
+    var margin = {top: 0, right: 50, bottom: 10, left: 180},
         width = 1500 - margin.left - margin.right,
         height = 80;
 
@@ -282,13 +270,12 @@ var visualizeProductivity = function(data) {
           .style('font-family','Raleway')
           .style('text-transform','lowercase')
           .attr("transform", "translate(0," + height + ")")
-          .call(xAxis)
+          .call(customXAxis)
           .append("text")
           .attr("x", width-margin.right)
           .attr("dx", ".71em")
-          .attr("dy", "-0.2em")
+          .attr("dy", "-0.2em");
 
-          .text("Time");
 
       function customYAxis(g) {
         var s = g.selection ? g.selection() : g;
@@ -297,9 +284,15 @@ var visualizeProductivity = function(data) {
         
       }
 
+      function customXAxis(g) {
+        var s = g.selection ? g.selection() : g;
+        g.call(xAxis);
+        s.select(".domain").remove();
+      }
+      
       svg.append("g")
           .attr("class", "y axis")
-          .style('font-style', 'italic')
+          .style('font-weight','bold')
           .style('font-family','Raleway')
           .call(customYAxis);
 
@@ -320,7 +313,7 @@ var visualizeProductivity = function(data) {
             //   return "#444";
             // }
           })
-          .attr("transform", "translate(0,13)")
+          .attr("transform", "translate(0,12)")
           .attr("x", function(d) { return x(d.from); })
           .attr("width", function(d) { return x(d.to) - x(d.from)});
 
@@ -330,15 +323,13 @@ var visualizeProductivity = function(data) {
     .attr('class', 'tooltip');
 
     tooltip.append('div').attr('class', 'name');
-    tooltip.append('div').attr('class', 'category')
     tooltip.append('div').attr('class', 'ran');
     // tooltip.append('div').attr('class', 'progress');
 
     svg.selectAll(".bar,.pending")
     .on('mouseover', function(d) {
 
-      tooltip.select('.name').html("Site: <b>" + d.name + "</b>");
-      tooltip.select('.category').html("Category: <b>" + d.category + "</b>");
+      tooltip.select('.name').html("Aggregated Category: <b>" + d.name + "</b>");
       tooltip.select('.ran').html(d.from.toString().substr(4,20) + " TO " + d.to.toString().substr(4,20));
       
       // tooltip.select('.progress').html(d.progress + "% completed");
@@ -368,7 +359,7 @@ var visualizeCal = function(data) {
         dd.from = parseDate2(dd.start_time);
         dd.to = parseDate2(dd.end_time);
     });
-    var margin = {top: 130, right: 50, bottom: 20, left: 180},
+    var margin = {top: 130, right: 50, bottom: 10, left: 180},
         width = 1500 - margin.left - margin.right,
         height = 80;
 
@@ -410,12 +401,12 @@ var visualizeCal = function(data) {
           .attr("transform", "translate(0," + height + ")")
           .call(customXAxis2)
           .append("text")
+          .style('font-size','5em')
           .attr('fill','none')
           .attr('stroke','#fff')
           .attr("x", width-margin.right)
           .attr("dx", ".71em")
-          .attr("dy", "-0.2em")
-          .text("Time");
+          .attr("dy", "-0.2em");
 
       function customYAxis2(g) {
         var s = g.selection ? g.selection() : g;
@@ -428,8 +419,8 @@ var visualizeCal = function(data) {
         var s = g.selection ? g.selection() : g;
         g.call(xAxis2);
         s.select(".domain").remove();
-        
       }
+
       svg.append("g")
           .attr("class", "y axis")
           .style('font-weight', 'bold')

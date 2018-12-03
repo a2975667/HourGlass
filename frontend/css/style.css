@@ -39,7 +39,7 @@ body {
 /***** integrated Styling ****/
 
 .title {
-    padding-top: 10px;
+    padding-top: 50px;
     position: fixed;
     left: 50%;
     transform: translate(-50%, 0);
@@ -48,22 +48,28 @@ body {
 
 h3,
 h2,
+h4,
 p {
+    padding:0px;
+    margin:0px;
     text-align: center;
     font-family: 'Raleway';
     /*font-weight:normal;*/
 }
 
 h2 {
+    padding-bottom:10px;
     font-size: 2em;
     font-weight: bold;
-    padding-bottom: 0px;
 }
 
 h3 {
-
+    font-size: 1em;
     font-weight: normal;
-    /*padding-top:35px;*/
+}
+h4 {
+    padding-bottom: 30px;
+    font-size: 1.2em;
 }
 
 /*#settings {
@@ -75,7 +81,11 @@ h3 {
     /*image-rendering: crisp-edges;*/
     /*image-rendering: pixelated;}*/
 
-/************** d3 Styling **************/
+/************** main vis Styling **************/
+
+#date_text {
+    font-weight:bold;
+}
 
 .bar {
     /*fill: #444;*/
@@ -108,7 +118,7 @@ h3 {
     flex-direction: column;
     align-content: center;
     align-items: center;
-        padding-top: 120px;
+    padding-top: 40px;
     padding-left:50px;
 }
 
@@ -131,25 +141,60 @@ h3 {
 
 /************ Settings Page Styling ************/
 
-.form {
-	padding: 50px;
-	width:500px;
-	background-color: #fff;
-	border-width: 2px;
-	border-color: #eee;
-	border-radius: 25px;
-	border-style: solid;
-	font-family: 'Raleway';
-	font-size: 12px;
+.fWrapper {
+    padding: 150px;
+}
+
+.fContainer {
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 25px;
+    font-family: 'Raleway';
+    font-size: 12px;
+}
+
+.aSettings {
+    border-width: 2px;
+    border-color: #eee;
+    border-radius: 25px;
+    border-style: solid;
+    width:600px;
+    /*background:#000;*/
+    height:200px;
+}
+
+#calAPI, #rtAPI {
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+  float: left;
+}
+.child_div_1 {
+  float: left;
+  margin-right: 5px;
+}
+
+#form {
+    border-width: 2px;
+    border-color: #eee;
+    border-radius: 25px;
+    border-style: solid;
+    min-height: 400px;
+    float: left;
+	padding: 30px;
+	width:300px;
 }
 input {
-	padding:50px;
+	/*padding:50px;*/
 	/*text-align: center;*/
 }
 
-/* The container */
+#sbm {
+    text-align: center;
+}
+
+/* Checkbox container */
 .inputLabel {
-	/*paddingpx;*/
     display: block;
     position: relative;
     padding-left: 35px;
@@ -162,7 +207,7 @@ input {
     user-select: none;
 }
 
-/* Hide the browser's default checkbox */
+/* Hiding default checkbox */
 .inputLabel input {
     position: absolute;
     opacity: 0;
@@ -171,7 +216,7 @@ input {
     width: 0;
 }
 
-/* Create a custom checkbox */
+/* Custom checkbox */
 .checkmark {
     position: absolute;
     top: 0;
