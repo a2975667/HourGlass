@@ -68,7 +68,7 @@
 						<p id="average">0</p>
 						<p>Lowest Number of Distractions:</p>
 						<p id="lowest">0</p>
-            <br>
+            <br> <!-- TODO: better legend -->
             <p><div class="boxblue"></div><br>Weekly Distractions, Goal Met</p>
     				<p><div class="boxred"></div><br>Weekly Distractions, Goal Not Met</p>
     				<p><div class="boxyellow"></div><br>Weekly Goal</p>
@@ -145,9 +145,11 @@
     "tag":weeks[3],
     "distractions":0,
     "goal":0
-  }];
+  }]; // to keep all the weeks in order
 
-  // TODO: what will this return if there isn't 3 weeks of data?
+  // TODO: elegant solution for less than 3 weeks of data
+  // these ajax calls are hardcoded to each week element because the loop was glitchy
+
   $.ajax({
     type: 'GET',
     url: 'https://hourglass-api.herokuapp.com/api/rank-distract?start_date='+weeks[0]+'&end_date='+weeks[1]+'&n=5',
@@ -197,6 +199,7 @@
         "goal":goals[2]
       });
 
+      // the rest of the graph is here so it doesn't try to render without data
       // set scales:
       xScale0.domain(data.map(d => d.tag));
       xScale1.domain(['distractions', 'goal']).range([0, xScale0.bandwidth()]);
@@ -302,7 +305,7 @@
     }
   });
 
-  // set up graph:
+  // set up graph before data loads
 
 		var container = d3.select('#d3id'),
 		    width = 750,
