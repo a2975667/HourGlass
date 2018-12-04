@@ -95,7 +95,6 @@ $.ajax({
 var visualize = function(data) {
  // var parseDate = d3.time.format("%H-%M-%S").parse;
     var parseDate = d3.time.format("%Y-%m-%dT%H:%M:%S").parse;
-
     data.forEach(function(d) {
         d.from = parseDate(d.from);
         d.to = parseDate(d.to);
@@ -107,10 +106,13 @@ var visualize = function(data) {
     var y = d3.scale.ordinal()
         .rangeRoundBands([0, height], .1);
 
-    var x = d3.time.scale().range([0, width]);
+    var x = d3.time.scale()
+        .domain([new Date(2018, 11, 3), new Date(2018, 11, 4)])
+        .range([0, width]);
 
     y.domain(data.map(function(d) { return d.name; }));
-    x.domain([d3.min(data,function(d){return d.from;}), d3.max(data,function(d){return d.to;})]);
+    // x.domain([d3.min(data,function(d){return d.from;}), d3.max(data,function(d){return d.to;})]);
+    // x.domain([d3.time, new Date(2012, 11, 4)]);
 
     var xAxis = d3.svg.axis()
         .scale(x)
