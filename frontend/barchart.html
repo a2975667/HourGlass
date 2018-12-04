@@ -55,9 +55,6 @@
 			<div id="graph">
 				<h2> Weekly Overview </h2>
 				<div id="d3id"></div>
-				<p><div class="boxblue"></div><br>Weekly Distractions, Goal Met</p>
-				<p><div class="boxred"></div><br>Weekly Distractions, Goal Not Met</p>
-				<p><div class="boxyellow"></div><br>Weekly Goal</p>
 			</div>
 
 			<div id="wide">
@@ -71,35 +68,241 @@
 						<p id="average">0</p>
 						<p>Lowest Number of Distractions:</p>
 						<p id="lowest">0</p>
+            <br>
+            <p><div class="boxblue"></div><br>Weekly Distractions, Goal Met</p>
+    				<p><div class="boxred"></div><br>Weekly Distractions, Goal Not Met</p>
+    				<p><div class="boxyellow"></div><br>Weekly Goal</p>
 				</div>
 			</div>
 	</div>
 
-		<script src="https://d3js.org/d3.v4.min.js"></script>
-		<script>
-		// current data assumptions: current string tags are start dates to a week. (only titular, does not matter)
-		// The numbers for distraction goals and actual distraction for each week are put into the same entry.
-		// Every entry has a date tag, a goal, and a distraction count. Undefined goals should be 0.
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
 
+  var today = new Date();
+  var day = today.getDate();
+  var month = today.getMonth() + 1;
+  var year = today.getFullYear();
+  if (day < 10) {
+      day = '0' + day;
+  }
+  if (month < 10) {
+      month = '0' + month;
+  }
 
+  var weeks = [(year + '-' + month + '-' + day)];
 
-		var data = [
-		  {
-		    "tag":"2018-10-29",
-		    "distractions":184,
-		    "goal":98
-		  },
-		  {
-		    "tag":"2018-11-5",
-				"distractions":87,
-		    "goal":98
-		  },
-		  {
-		    "tag":"2018-11-12",
-				"distractions":65,
-		    "goal":112
-		  }
-		];
+  for (var i = 0; i < 3; i++) { // to number of desired weeks
+    today.setDate(today.getDate() - 7);
+    var day = today.getDate();
+    var month = today.getMonth() + 1;
+    var year = today.getFullYear();
+
+    if (day < 10) {
+        day = '0' + day;
+    }
+
+    if (month < 10) {
+        month = '0' + month;
+    }
+
+    weeks.unshift(year + '-' + month + '-' + day);
+  }
+
+  function countDistractions(result) { // pass in parsed JSON
+    count = 0;
+
+    if (result == []) {
+      return 0;
+    }
+
+    if (localStorage.getItem('productive') != null && localStorage.getItem('non-productive') != null) {
+      var nproductive = localStorage.getItem('non-productive');
+
+      for (var i = 0; i < result.length; i++) {
+        if (nproductive.includes(result[i].name)) {
+          count += result[i].times;
+        }
+      }
+    }
+
+    return count;
+  }
+
+  var goals = [98, 98, 112];
+
+  var data = [{
+    "tag":weeks[1],
+    "distractions":0,
+    "goal":0
+  },
+  {
+    "tag":weeks[2],
+    "distractions":0,
+    "goal":0
+  },
+  {
+    "tag":weeks[3],
+    "distractions":0,
+    "goal":0
+  }];
+
+  // TODO: what will this return if there isn't 3 weeks of data?
+  $.ajax({
+    type: 'GET',
+    url: 'https://hourglass-api.herokuapp.com/api/rank-distract?start_date='+weeks[0]+'&end_date='+weeks[1]+'&n=5',
+    headers: { 'key': 'B63TuW7oKpBKsoZePpZ31IGZkxtEKuUVTcYQeJRz' },
+    success: function(result) {
+      count = countDistractions(result);
+
+      data[0] = ({
+        "tag":weeks[1],
+        "distractions":count,
+        "goal":goals[0]
+      });
+    },
+    error: function(result) {
+        alert('error');
+    }
+  });
+
+  $.ajax({
+    type: 'GET',
+    url: 'https://hourglass-api.herokuapp.com/api/rank-distract?start_date='+weeks[1]+'&end_date='+weeks[2]+'&n=5',
+    headers: { 'key': 'B63TuW7oKpBKsoZePpZ31IGZkxtEKuUVTcYQeJRz' },
+    success: function(result) {
+      count = countDistractions(result);
+
+      data[1] = ({
+        "tag":weeks[2],
+        "distractions":count,
+        "goal":goals[1]
+      });
+    },
+    error: function(result) {
+        alert('error');
+    }
+  });
+
+  $.ajax({
+    type: 'GET',
+    url: 'https://hourglass-api.herokuapp.com/api/rank-distract?start_date='+weeks[2]+'&end_date='+weeks[3]+'&n=5',
+    headers: { 'key': 'B63TuW7oKpBKsoZePpZ31IGZkxtEKuUVTcYQeJRz' },
+    success: function(result) {
+      count = countDistractions(result);
+
+      data[2] = ({
+        "tag":weeks[3],
+        "distractions":count,
+        "goal":goals[2]
+      });
+
+      // set scales:
+      xScale0.domain(data.map(d => d.tag));
+      xScale1.domain(['distractions', 'goal']).range([0, xScale0.bandwidth()]);
+      yScale.domain([0, d3.max(data, d => d.distractions > d.goal ? d.distractions : d.goal)]);
+
+      var tag = svg.selectAll(".tag")
+        .data(data)
+        .enter().append("g")
+        .attr("class", "tag")
+        .attr("transform", d => `translate(${xScale0(d.tag)},0)`);
+
+      //TODO: add display for exact number of each bar on hover
+      tag.selectAll(".bar.distractions")
+        .data(d => [d])
+        .enter()
+        .append("rect")
+        .attr("class", "bar distractions")
+      .style("fill", function(d) {
+          if ((d.distractions <= d.goal) || (d.goal == 0)) {
+            return "#5f66fb";
+          } else {
+            return "#fc585a";
+          }
+        })
+        .attr("x", d => xScale1('distractions'))
+        .attr("y", d => yScale(d.distractions))
+        .attr("width", xScale1.bandwidth())
+        .attr("height", d => {
+          return height - margin.top - margin.bottom - yScale(d.distractions)
+        });
+
+      tag.selectAll(".bar.goal")
+        .data(d => [d])
+        .enter()
+        .append("rect")
+        .attr("class", "bar goal")
+      .style("fill", "#fec95a")
+        .attr("x", d => xScale1('goal'))
+        .attr("y", d => yScale(d.goal))
+        .attr("width", (xScale1.bandwidth() / 8))
+        .attr("height", d => {
+          return height - margin.top - margin.bottom - yScale(d.goal)
+        });
+
+      svg.append("g")
+         .attr("class", "x axis")
+         .attr("transform", `translate(0,${height - margin.top - margin.bottom})`)
+         .call(xAxis);
+
+      svg.append("g")
+         .attr("class", "y axis")
+         .call(yAxis);
+
+      // progress statistics
+      function getDistractions() {
+        return data.map(d => d.distractions);
+      }
+
+      function getGoals() {
+        return data.map(d => d.goal);
+      }
+
+      function getMin() {
+        return Math.min(...getDistractions());
+      }
+
+      function getMax() {
+        return Math.max(...getDistractions());
+      }
+
+      function getAvg() {
+        var dist = getDistractions();
+        var total = 0;
+
+        for (var i = 0; i < dist.length; i++) {
+          total += dist[i];
+        }
+
+        return (total / dist.length);
+      }
+
+      function getGoalsMet() {
+        var dist = getDistractions();
+        var goals = getGoals();
+        var total = 0;
+
+        for (var i = 0; (i < dist.length) && (i < goals.length); i++) {
+          if (dist[i] < goals[i]) {
+            total += 1;
+          }
+        }
+
+        return total;
+      }
+
+      document.getElementById("goalMet").innerHTML = getGoalsMet() + " weeks";
+      document.getElementById("highest").innerHTML = getMax() + " /week";
+      document.getElementById("lowest").innerHTML = getMin() + " /week";
+      document.getElementById("average").innerHTML = getAvg() + " /week";
+    },
+    error: function(result) {
+        alert('error');
+    }
+  });
+
+  // set up graph:
 
 		var container = d3.select('#d3id'),
 		    width = 750,
@@ -126,103 +329,5 @@
 		var yAxis = d3.axisLeft(yScale)
 				.tickSizeOuter(axisTicks.outerSize);
 
-		// set scales:
-		xScale0.domain(data.map(d => d.tag));
-		xScale1.domain(['distractions', 'goal']).range([0, xScale0.bandwidth()]);
-		yScale.domain([0, d3.max(data, d => d.distractions > d.goal ? d.distractions : d.goal)]);
-
-		var tag = svg.selectAll(".tag")
-		  .data(data)
-		  .enter().append("g")
-		  .attr("class", "tag")
-		  .attr("transform", d => `translate(${xScale0(d.tag)},0)`);
-
-		tag.selectAll(".bar.distractions")
-		  .data(d => [d])
-		  .enter()
-		  .append("rect")
-		  .attr("class", "bar distractions")
-		.style("fill", function(d) {
-				if (d.distractions < d.goal) {
-					return "#5f66fb";
-				} else {
-					return "#fc585a";
-				}
-			})
-		  .attr("x", d => xScale1('distractions'))
-		  .attr("y", d => yScale(d.distractions))
-		  .attr("width", xScale1.bandwidth())
-		  .attr("height", d => {
-		    return height - margin.top - margin.bottom - yScale(d.distractions)
-		  });
-
-		tag.selectAll(".bar.goal")
-		  .data(d => [d])
-		  .enter()
-		  .append("rect")
-		  .attr("class", "bar goal")
-		.style("fill", "#fec95a")
-		  .attr("x", d => xScale1('goal'))
-		  .attr("y", d => yScale(d.goal))
-		  .attr("width", (xScale1.bandwidth() / 8))
-		  .attr("height", d => {
-		    return height - margin.top - margin.bottom - yScale(d.goal)
-		  });
-
-		svg.append("g")
-		   .attr("class", "x axis")
-		   .attr("transform", `translate(0,${height - margin.top - margin.bottom})`)
-		   .call(xAxis);
-
-		svg.append("g")
-		   .attr("class", "y axis")
-		   .call(yAxis);
-
-		// progress statistics
-		function getDistractions() {
-  		return data.map(d => d.distractions);
-		}
-
-		function getGoals() {
-			return data.map(d => d.goal);
-		}
-
-		function getMin() {
-  		return Math.min(...getDistractions());
-		}
-
-		function getMax() {
-  		return Math.max(...getDistractions());
-		}
-
-		function getAvg() {
-			var dist = getDistractions();
-			var total = 0;
-
-			for (var i = 0; i < dist.length; i++) {
-				total += dist[i];
-			}
-
-			return (total / dist.length);
-		}
-
-		function getGoalsMet() {
-			var dist = getDistractions();
-			var goals = getGoals();
-			var total = 0;
-
-			for (var i = 0; (i < dist.length) && (i < goals.length); i++) {
-				if (dist[i] < goals[i]) {
-					total += 1;
-				}
-			}
-
-			return total;
-		}
-
-		document.getElementById("goalMet").innerHTML = getGoalsMet() + " weeks";
-		document.getElementById("highest").innerHTML = getMax() + " /week";
-		document.getElementById("lowest").innerHTML = getMin() + " /week";
-		document.getElementById("average").innerHTML = getAvg() + " /week";
-	</script>
+</script>
 </body>
