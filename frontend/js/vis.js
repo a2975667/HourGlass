@@ -107,7 +107,7 @@ var visualize = function(data) {
         .rangeRoundBands([0, height], .1);
 
     var x = d3.time.scale()
-        .domain([new Date(2018, 11, 3), new Date(2018, 11, 4)])
+        .domain([new Date(year, month-1, day), new Date(year, month-1, day2)])
         .range([0, width]);
 
     y.domain(data.map(function(d) { return d.name; }));
