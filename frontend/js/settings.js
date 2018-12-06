@@ -10,9 +10,6 @@ var data = JSON.parse(localStorage.getItem('key'));
 
 var unset = [];
 var size;
-// localStorage.setItem('productive',"");
-// localStorage.setItem('non-productive',"");
-$("#theverge.com").prop("checked", true);
 function clean(rawData) {
         console.log("settings test2");
         var p = localStorage.getItem('productive');

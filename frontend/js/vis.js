@@ -28,7 +28,6 @@ if(userDate != null) {
   } 
   today2=userDate.substr(0,8);
   today2=today2+day2;
-  alert(today2);
 }
 else{
   today = new Date();
@@ -53,10 +52,10 @@ var rtKey = localStorage.getItem('rtKey');
 var calKey = localStorage.getItem('calKey');
 if(rtKey.length==0) {
   //Haven't set up RT API
-  alert("Trouble finding your RescueTiem API Key");
+  alert("Trouble finding your RescueTime API Key, please check that it is set up properly!");
 }
 if(calKey.length==0) {
-  alert("Trouble finding your RescueTiem Google Cal Key");
+  alert("Trouble finding your Google Cal Key API Key, please check that it is set up properly!");
 }
 
 
@@ -64,7 +63,7 @@ if(calKey.length==0) {
 var apiKey1='B63mVDYNd_2h9n4dbHjgrjMyNBCjVdZUOH5luFCE';
 $.ajax({
   type: 'GET',
-  url: 'https://hourglass-api.herokuapp.com/api/rank-distract-for-d3?start_date='+today+'&end_date='+today+'&n=5',
+  url: 'https://hourglass-api.herokuapp.com/api/rank-distract-for-d3?start_date='+today+'&end_date='+today+'&n=10',
   headers: { 'key': rtKey },
   success: function(data) {
     console.log(data);
