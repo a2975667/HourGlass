@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Tutorial Page</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script language="JavaScript" type="text/javascript" src="js/jquery.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="js/d3.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			.imgbox {
+				display: grid;
+				width: 100%;
+			}
+			.center-fit {
+				max-height: 100%;
+				max-width: 98.9vw;
+				margin: auto;
+			}
+		</style>
+</head>
+
+
+<body>
+	<div class = "imgbox">
+		<img class = "center-fit" src = "css/tutorial_bg.jpg" alt="Tutorial">
+	</div>
+	<form action="/action_page.php">
+  Google API Key: <input type="text" name="calKeyInput"><br>
+  RescueTime API Key: <input type="text" name="rtKeyInput"><br>
+  <input type="submit" value="Submit">
+</form>
+</body>
+
+</html>
