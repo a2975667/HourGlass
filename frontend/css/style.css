@@ -113,7 +113,7 @@ h4 {
 
 
 #container {
-    width: 100%;
+    /*width: 100%;*/
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -145,23 +145,47 @@ h4 {
     padding: 150px;
 }
 
+input[type="text"] {
+    /*margin:10px auto;*/
+    /*margin-left:50%;*/
+    /*margin-right:50%;*/
+    margin: auto;
+    display: block;
+}
+
+/*input.selected*/
+
+.textInput {
+    width:250px;
+    border-radius: 25px;
+    border-style: solid;
+    border-color: #eee;
+    padding: 10px 15px 10px 15px;
+}
+
 .fContainer {
     padding-left: 25px;
     padding-right: 25px;
-    padding-top: 25px;
     font-family: 'Raleway';
-    font-size: 12px;
+    font-size: 15px;
+}
+input:focus {
+    outline:none;
 }
 
 .aSettings {
+    padding:30px;
     border-width: 2px;
     border-color: #eee;
     border-radius: 25px;
     border-style: solid;
-    width:600px;
+    min-width:400px;
     /*background:#000;*/
-    height:200px;
+    margin: 0 auto;
+    /*height:200px;*/
 }
+
+
 
 #calAPI, #rtAPI {
   width: 100px;
@@ -190,7 +214,46 @@ input {
 }
 
 #sbm {
+    margin-top: 30px;
     text-align: center;
+    /*margin-bottom:20px;*/
+    background: #000;
+    color:#fff;
+    border-radius: 25px;
+    letter-spacing: 1.6px;
+    color:#fff;
+    cursor: pointer;
+    border-color: #fff;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 40px;
+    padding:13px 26px 13px 26px;
+    transition: background-color 0.25s ease-in-out;
+}
+
+
+#sbmWrapper {
+    padding-top: 40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#calWrapper {
+    padding-bottom: 15px;
+}
+
+#rtWrapper {
+    padding-bottom: 30px;
+}
+
+#dateWrapper {
+    padding-bottom: 30px;
+}
+
+#disWrapper {
+    padding-bottom: 30px; 
 }
 
 /* Checkbox container */

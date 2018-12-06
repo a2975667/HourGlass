@@ -11,27 +11,61 @@
 // });
 // PULLING FROM FILE
 
-var today = new Date();
-var day = today.getDate()-1;
-// var day = 27;
-var day2= day+1;
-var month = today.getMonth()+1; //January is 0!
-var year = today.getFullYear();
+var today, today2, day2, day, month, year;
+var userDate = localStorage.getItem('date');
 
-if(day<10) {
-    day = '0'+day
-} 
 
-if(month<10) {
-    month = '0'+month
-} 
-today = year + '-' + month + '-' + day;
-var today2 = year + '-' + month + '-' + day2;
+if(userDate != null) {
+  today=userDate;
+  day=parseInt(userDate.substr(8,9),10);
+  month=parseInt(userDate.substr(5,6),10);
+  year=parseInt(userDate.substr(0,4),10);
+  var temp = userDate.substr(8,9);
+  var day2 = parseInt(temp, 10);
+  day2 = day2+1;
+  if(day2<10) {
+      day2 = '0'+day2;
+  } 
+  today2=userDate.substr(0,8);
+  today2=today2+day2;
+  alert(today2);
+}
+else{
+  today = new Date();
+  day2 = today.getDate();
+  day = day2-1;
+  month = today.getMonth()+1;
+  year = today.getFullYear();
+  if(day<10) {
+      day = '0'+day;
+  } 
+  if(day2<10) {
+      day2='0'+day2;
+  }
+  if(month<10) {
+      month = '0'+month;
+  } 
+  today = year + '-' + month + '-' + day;
+  var today2 = year + '-' + month + '-' + day2;
+}
 
+var rtKey = localStorage.getItem('rtKey');
+var calKey = localStorage.getItem('calKey');
+if(rtKey.length==0) {
+  //Haven't set up RT API
+  alert("Trouble finding your RescueTiem API Key");
+}
+if(calKey.length==0) {
+  alert("Trouble finding your RescueTiem Google Cal Key");
+}
+
+
+
+var apiKey1='B63mVDYNd_2h9n4dbHjgrjMyNBCjVdZUOH5luFCE';
 $.ajax({
   type: 'GET',
   url: 'https://hourglass-api.herokuapp.com/api/rank-distract-for-d3?start_date='+today+'&end_date='+today+'&n=5',
-  headers: { 'key': 'B63mVDYNd_2h9n4dbHjgrjMyNBCjVdZUOH5luFCE' },
+  headers: { 'key': rtKey },
   success: function(data) {
     console.log(data);
     localStorage.setItem('key',JSON.stringify(data));
@@ -100,8 +134,8 @@ var visualize = function(data) {
         d.to = parseDate(d.to);
     });
     var margin = {top: 0, right: 50, bottom: 50, left: 180},
-        width = 1500 - margin.left - margin.right,
-        height = 380 - margin.top - margin.bottom;
+        width = 1350 - margin.left - margin.right,
+        height = 350 - margin.top - margin.bottom;
 
     var y = d3.scale.ordinal()
         .rangeRoundBands([0, height], .1);
@@ -117,7 +151,7 @@ var visualize = function(data) {
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("bottom")
-        .ticks(10).outerTickSize(0)
+        .ticks(7).outerTickSize(0)
         .tickSize(0)
         .tickPadding(10)
         .tickFormat(d3.time.format("%H %p"));
@@ -170,17 +204,25 @@ var visualize = function(data) {
           .attr("fill",function(d) {
             var p = localStorage.getItem('productive');
             var np = localStorage.getItem('non-productive');
-            if(p==null || np == null)
+            if(p == null || np == null){
                 return "#3498df";
+                alert(d.name);
+              }
             p = p.split(",");
             np = np.split(",");
             for(var i = 0 ; i < p.length; i++){
               if (p[i]==d.name) {
                 return "#ffcc2e";
               }
+              else {
+                return "#3498df";
+              }
             }
             for(var i = 0; i < np.length; i++) {
               if (np[i] == d.name) {
+                return "#3498df";
+              }
+              else {
                 return "#3498df";
               }
             }
@@ -233,7 +275,7 @@ var visualizeProductivity = function(data) {
         d.to = parseDate(d.to);
     });
     var margin = {top: 0, right: 50, bottom: 10, left: 180},
-        width = 1500 - margin.left - margin.right,
+        width = 1350 - margin.left - margin.right,
         height = 80;
 
     var y = d3.scale.ordinal()
@@ -362,7 +404,7 @@ var visualizeCal = function(data) {
         dd.to = parseDate2(dd.end_time);
     });
     var margin = {top: 130, right: 50, bottom: 10, left: 180},
-        width = 1500 - margin.left - margin.right,
+        width = 1350 - margin.left - margin.right,
         height = 80;
 
     var y2 = d3.scale.ordinal()
@@ -403,7 +445,7 @@ var visualizeCal = function(data) {
           .attr("transform", "translate(0," + height + ")")
           .call(customXAxis2)
           .append("text")
-          .style('font-size','5em')
+          .style('font-size','2em')
           .attr('fill','none')
           .attr('stroke','#fff')
           .attr("x", width-margin.right)
