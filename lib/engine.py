@@ -59,7 +59,8 @@ def sort_by_time(api_key, start_date, end_date, n=10, summary=False):
     #print (results)
     return results
 
-def sort_by_time_for_d3(api_key, start_date, end_date, n=10):
+def sort_by_time_for_d3(api_key, start_date, end_date, n):
+    n = int(n)
     data = raw_query(api_key, start_date, end_date)
     good_result, bad_result = get_working_hours(data['rows'], [], [])
     time_dict = defaultdict(lambda: {})
