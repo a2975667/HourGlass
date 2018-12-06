@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Distractions</title>
+    <title>Hour Glass - Distractions</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/style.css" />
@@ -129,7 +129,7 @@
     return count;
   }
 
-  var goals = [98, 98, 112];
+  var goals = [0, 98, 112];
 
   var data = [{
     "tag":weeks[1],
@@ -145,7 +145,7 @@
     "tag":weeks[3],
     "distractions":0,
     "goal":0
-  }]; // to keep all the weeks in order
+  }]; // set up data array to keep all the weeks in order
 
   // TODO: elegant solution for less than 3 weeks of data
   // these ajax calls are hardcoded to each week element because the loop was glitchy
@@ -278,7 +278,7 @@
           total += dist[i];
         }
 
-        return (total / dist.length);
+        return Math.floor(total / dist.length);
       }
 
       function getGoalsMet() {
@@ -295,7 +295,12 @@
         return total;
       }
 
-      document.getElementById("goalMet").innerHTML = getGoalsMet() + " weeks";
+      if (getGoalsMet() != 1) {
+        document.getElementById("goalMet").innerHTML = getGoalsMet() + " weeks";
+      } else {
+        document.getElementById("goalMet").innerHTML = getGoalsMet() + " week";
+      }
+
       document.getElementById("highest").innerHTML = getMax() + " /week";
       document.getElementById("lowest").innerHTML = getMin() + " /week";
       document.getElementById("average").innerHTML = getAvg() + " /week";
