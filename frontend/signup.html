@@ -24,7 +24,12 @@
 	            </p>
 	            <div class="auth">
 	            	<a href="tutorial.html" id="signin" >Get Started </a>
-	            </div>
+					<br>
+					<br>
+					<br>
+					<br>
+					<a href="index.html" id="submit_btn" name="submit_btn" style='margin-left: auto; margin-right: auto; background-color: lightblue; letter-spacing: 1.6px; color: #fff;  border-radius: 40px; padding: 10px 20px 10px 20px; transition: background-color 0.25s ease-in-out;'>Demo </a>
+	            </div>				
         	</div>
         </div>
     </div>
@@ -33,6 +38,17 @@
 		if ((localStorage.getItem('rtKey')!=null) && (localStorage.getItem('calKey')!=null)) {
 			window.location.replace("index.html");
 		}
+		</script>
+
+		<script>
+		$('#submit_btn').on('click', function() {
+			if(1==1) {
+				localStorage.setItem('rtKey', 'B63mVDYNd_2h9n4dbHjgrjMyNBCjVdZUOH5luFCE');
+				localStorage.setItem('calKey', 'AIzaSyBPhqIfGLwvO9srD22V8kLXAd3p58PxdjQ');
+				localStorage.setItem('calEKey', 'a2975667@gmail.com');
+			}
+			window.location.href = 'index.html';
+		})
 		</script>
 </body>
 
