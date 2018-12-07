@@ -19,6 +19,7 @@ def data_request_safe_check(request, cal=False):
     
     start_date = request.args.get('start_date')
     end_date = request.args.get('end_date')
+    n = request.args.get('n')
     if api_key == None:
         raise InvalidUsage('API key not provided', status_code=410)
     elif start_date == None or end_date == None:
@@ -26,12 +27,19 @@ def data_request_safe_check(request, cal=False):
     elif cal == True and calendar == None:
         raise InvalidUsage('calendar not provided', status_code=409)
 
+
+
     payload = {'api_key': api_key,
                'start_date': start_date, 'end_date': end_date}
 
+    if n == None:
+        payload['n'] = 10
+    else:
+        payload['n'] = n
+
     if cal: 
         payload['calendar'] = calendar
-
+    
     return payload
 
 @app.route('/')
@@ -71,7 +79,8 @@ def get_rank_distract_data():
 @app.route('/api/rank-distract-for-d3')
 def get_rank_distract_data_for_d3():
     payload = Munch(data_request_safe_check(request))
-    response = sort_by_time_for_d3(payload.api_key, payload.start_date, payload.end_date)
+    pprint(payload)
+    response = sort_by_time_for_d3(payload.api_key, payload.start_date, payload.end_date, payload.n)
     return jsonify(response)
 
 

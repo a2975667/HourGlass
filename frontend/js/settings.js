@@ -10,9 +10,6 @@ var data = JSON.parse(localStorage.getItem('key'));
 
 var unset = [];
 var size;
-// localStorage.setItem('productive',"");
-// localStorage.setItem('non-productive',"");
-$("#theverge.com").prop("checked", true);
 function clean(rawData) {
         console.log("settings test2");
         var p = localStorage.getItem('productive');
@@ -49,11 +46,11 @@ function clean(rawData) {
                 document.getElementById(p[i]).checked = true;
             } 
         if (localStorage.getItem('calKey') == null) {
-            alert("You haven't set up your Calender API yet!");
+            // alert("You haven't set up your Calender API yet!");
             // window.location.href = "signup.html";
         }
         if (localStorage.getItem('rtKey') == null) {
-            alert("You haven't set up your RescueTime API yet!");
+            // alert("You haven't set up your RescueTime API yet!");
             // window.location.href = "signup.html";
         }
 
@@ -94,16 +91,21 @@ function submit() {
 
 	}
 	localStorage.removeItem("unset");
-
     /**** Storing API Keys ****/
     var calKey = $.trim($("#calKey").val()); // Pulling the value of the key from the ID Tag and trimming the whitespaces.
-    var rtKey = document.getElementById("rtKey").value; 
-    if (calKey.length>0) { // If length of string is > 0.
+    calKeyl = calKey.length;
+    var rtKey = $.trim($("#rtKey").val()); 
+    var sDate = $.trim($("#dateInput").val());
+    if (calKeyl>0) { // If length of string is > 0.
         localStorage.setItem('calKey',calKey); // Stores the variable "calKey" into localStorage, the key to access this in localStorage is also called calKey.
     }
     if (rtKey.length>0) {
         localStorage.setItem('rtKey',rtKey);
     }
+    if(sDate.length>0){
+        localStorage.setItem('date',sDate);
+    }
+    
     /*
     To check what's in localStorage. 
     Right-click in chrome and go under 
