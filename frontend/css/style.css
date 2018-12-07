@@ -329,7 +329,13 @@ input {
     transform: rotate(45deg);
 }
 
+/************ Barchart/Distractions Page Styling **********/
 
+.legend {
+	border: 1px;
+	border-color: black;
+	padding: 1em;
+}
 
 /************ Signup Page Styling **********/
 
