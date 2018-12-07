@@ -11,26 +11,29 @@
 // });
 // PULLING FROM FILE
 
-var today, today2, day2, day, month, year, siteNum;
-var userDate = localStorage.getItem('date'); // Fetches user-defined date input from localStorage
-var rtKey = localStorage.getItem('rtKey'); // 
+var today, today2, day2, day, month, year,siteNum;
+var userDate = localStorage.getItem('date');
+var rtKey = localStorage.getItem('rtKey');
 var calKey = localStorage.getItem('calKey');
 var calEKey = localStorage.getItem('calEKey');
 var numberSites = localStorage.getItem('siteNum');
-
-if(numberSites == null){
+ if(numberSites == null){
     siteNum = 8;
 }
 else{ 
     siteNum = numberSites; 
 }
 
+
 if(userDate == null && rtKey == null && calKey == null && calEKey == null){
-  window.location.href = "signup.html";
+   window.location.href = "signup.html";
 }
 
 if(userDate != null) {
   today=userDate;
+  day=parseInt(userDate.substr(8,9),10);
+  month=parseInt(userDate.substr(5,6),10);
+  year=parseInt(userDate.substr(0,4),10);
   var temp = userDate.substr(8,9);
   var day2 = parseInt(temp, 10);
   day2 = day2+1;
@@ -71,7 +74,7 @@ if(calKey.length==0) {
 
 $.ajax({
   type: 'GET',
-  url: 'https://hourglass-api.herokuapp.com/api/rank-distract-for-d3?start_date='+today+'&end_date='+today+'&n='+ siteNum,
+  url: 'https://hourglass-api.herokuapp.com/api/rank-distract-for-d3?start_date='+today+'&end_date='+today+'&n='+siteNum,
   headers: { 'key': rtKey },
   success: function(data) {
     console.log(data);
@@ -159,9 +162,9 @@ var visualize = function(data) {
         .scale(x)
         .orient("bottom")
         .ticks(7).outerTickSize(0)
-        .tickSize(3)
+        .tickSize(0)
         .tickPadding(10)
-        .tickFormat(d3.time.format("%I %p"));
+        .tickFormat(d3.time.format("%H %p"));
 
     var yAxis = d3.svg.axis()
         .scale(y)

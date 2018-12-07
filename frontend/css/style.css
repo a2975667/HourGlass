@@ -144,7 +144,7 @@ h4 {
 .fWrapper {
     padding-top: 50px;
     /*padding-left: 150px;*/
-    min-height:664px;
+    min-height:649px;
     padding-right: 200px;
     display: flex;
     justify-content: center;
@@ -247,7 +247,7 @@ input {
 }
 
 #calEWrapper {
-    padding-bottom: 30px;
+    padding-bottom: 15px;
 }
 
 #rtWrapper {
