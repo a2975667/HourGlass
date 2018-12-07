@@ -24,6 +24,17 @@
 				max-width: 98.9vw;
 				margin: auto;
 			}
+			.button {
+				background-color: #81CAF0; /* Green */
+				border: none;
+			 color: white;
+			 padding: 10px 20px;
+			 text-align: center;
+			 text-decoration: none;
+			 display: inline-block;
+			 font-size: 16px;
+			 margin: 25px 5px;
+			}
 			.column {
 				float: left;
 				width: 50%;
@@ -70,11 +81,11 @@
 				<div class="center">
 					<input type="text" id="rtKeyInput" name="rtKeyInput">
 					<a href="https://www.rescuetime.com/apidoc" target="_blank"><p>How to set up your RescueTime API Key<p></a>
+					<button class="button" id="submit_btn" name="submit_btn">Submit</button>
 				</div>
 		</div>
 	</div>
 	<div class="center">
-		<button type="button" id="submit_btn" name="submit_btn">Submit</button>
 	</div>
 	<script>
 		$('#submit_btn').on('click', function() {
