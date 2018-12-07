@@ -152,13 +152,10 @@
     return count;
   }
 
-  var goals = [0, 0, 0];
+  var goals = [100, 100, 100];
 
   if (localStorage.getItem('distractionGoal') != null) {
     goals[2] = localStorage.getItem('distractionGoal');
-    console.log(goals[2]);
-  } else {
-    goals[2] = 100;
   }
 
   var data = [{
