@@ -22,6 +22,12 @@
     vertical-align: middle;
 	}
 
+  #d3id {
+    text-align: center;
+    font-family: 'Raleway';
+    font-size: 23px;
+  }
+
 	.boxblue {
 		background-color: #5f66fb;
   	position: absolute;
@@ -91,8 +97,12 @@
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
-
   var today = new Date();
+
+  // if (localStorage.getItem('date') != null) {
+  //
+  // }
+
   var day = today.getDate();
   var month = today.getMonth() + 1;
   var year = today.getFullYear();
@@ -160,8 +170,18 @@
     "goal":0
   }]; // set up data array to keep all the weeks in order
 
-  // set up graph before data loads
+if ((localStorage.getItem('productive') == null && localStorage.getItem('non-productive') == null)) {
+  // if graph would be empty
 
+  var div = document.getElementById('d3id');
+  div.innerHTML += "Please set productive sites in settings to view your distractions overview.";
+
+  document.getElementById("goalMet").innerHTML = "Unavailable";
+  document.getElementById("highest").innerHTML = "Unavailable";
+  document.getElementById("lowest").innerHTML = "Unavailable";
+  document.getElementById("average").innerHTML = "Unavailable";
+} else {
+  // set up graph before data loads
 		var container = d3.select('#d3id'),
 		    width = 750,
 		    height = 400,
@@ -187,7 +207,6 @@
 		var yAxis = d3.axisLeft(yScale)
 				.tickSizeOuter(axisTicks.outerSize);
 
-  // TODO: elegant solution for less than 3 weeks of data
   // these ajax calls are hardcoded to each week element because the loop was glitchy
 
   $.ajax({
@@ -367,6 +386,7 @@
         alert('error');
     }
   });
+}
 
 </script>
 </body>
