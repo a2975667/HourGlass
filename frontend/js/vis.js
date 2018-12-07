@@ -214,28 +214,56 @@ var visualize = function(data) {
           .attr("fill",function(d) {
             var p = localStorage.getItem('productive');
             var np = localStorage.getItem('non-productive');
+            // alert(d.name);
             if(p == null || np == null){
                 return "#3498df";
-                alert(d.name);
+                // alert(d.name);
               }
             p = p.split(",");
             np = np.split(",");
-            for(var i = 0 ; i < p.length; i++){
-              if (p[i]==d.name) {
+            // alert(p[0]);
+            // alert(p.length);
+            // alert(p[1]);
+            // alert(d);
+
+            for (var i = 0; i < p.length; i++){
+              // alert(i);
+              if(p[i] == d.name){
                 return "#ffcc2e";
               }
-              else {
+              // if()
+            }
+            for (var i = 0; i < np.length; i++){
+              if(np[i] == d.name){
                 return "#3498df";
               }
             }
-            for(var i = 0; i < np.length; i++) {
-              if (np[i] == d.name) {
-                return "#3498df";
-              }
-              else {
-                return "#3498df";
-              }
-            }
+
+            // for(var i = 0 ; i <= p.length; i++){
+            //   alert("i = " + i + " : " + p[i] + " : " +d.name);
+
+            //   if (p[i] == d.name) {
+            //     // alert(p[i])
+            //     // alert(p[i] + " : " + d.name + " : yellow");
+            //     return "#ffcc2e"; // ffcc2e is Yellow
+            //   }
+            //   else {
+            //     alert(d.name + " is blue?");
+            //     return "#3498df"; // #3498df is Blue
+            //   }
+            // }
+            // alert(p.length);
+            // for(var i = 0; i < np.length; i++) {
+            //   if (np[i] == d.name) {
+            //     alert(d.name + " was set to blue");
+            //     return "#3498df";
+                
+            //   }
+            //   else {
+            //     alert(d.name + " was also set to blue");                
+            //     return "#3498df";
+            //   }
+            // }
           })
           .attr("transform", "translate(0,9)")
           .attr("x", function(d) { return x(d.from); })

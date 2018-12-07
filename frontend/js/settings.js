@@ -116,7 +116,6 @@ function submit() {
     if(siteNum.length>0){
         localStorage.setItem('siteNum', siteNum);
     }
-    
     /*
     To check what's in localStorage. 
     Right-click in chrome and go under 
