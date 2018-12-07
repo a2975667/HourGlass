@@ -152,7 +152,14 @@
     return count;
   }
 
-  var goals = [0, 98, 112];
+  var goals = [0, 0, 0];
+
+  if (localStorage.getItem('distractionGoal') != null) {
+    goals[2] = localStorage.getItem('distractionGoal');
+    console.log(goals[2]);
+  } else {
+    goals[2] = 100;
+  }
 
   var data = [{
     "tag":weeks[1],
@@ -304,7 +311,6 @@ if ((localStorage.getItem('productive') == null && localStorage.getItem('non-pro
         .on('mousemove', function(d) {
           tooltip.style('top', (d3.event.layerY + 10) + 'px')
           .style('left', (d3.event.layerX) + 'px');
-          console.log(d3.event.layerX);
         })
         .on('mouseout', function() {
           tooltip.style('display', 'none');
@@ -333,7 +339,6 @@ if ((localStorage.getItem('productive') == null && localStorage.getItem('non-pro
         .on('mousemove', function(d) {
           tooltip.style('top', (d3.event.layerY + 10) + 'px')
           .style('left', (d3.event.layerX) + 'px');
-          console.log(d3.event.layerX);
         })
         .on('mouseout', function() {
           tooltip.style('display', 'none');
@@ -381,6 +386,17 @@ if ((localStorage.getItem('productive') == null && localStorage.getItem('non-pro
         var dist = getDistractions();
         var goals = getGoals();
         var total = 0;
+        var nogoals = true;
+
+        for (var i = 0; i < goals.length; i++) {
+          if (goals[i] > 0) {
+            nogoals = false;
+          }
+        }
+
+        if (nogoals) {
+          return -1;
+        }
 
         for (var i = 0; (i < dist.length) && (i < goals.length); i++) {
           if (dist[i] < goals[i]) {
@@ -391,10 +407,14 @@ if ((localStorage.getItem('productive') == null && localStorage.getItem('non-pro
         return total;
       }
 
-      if (getGoalsMet() != 1) {
-        document.getElementById("goalMet").innerHTML = getGoalsMet() + " weeks";
+      if (getGoalsMet() == -1) {
+        document.getElementById("goalMet").innerHTML = "No goals set!";
       } else {
-        document.getElementById("goalMet").innerHTML = getGoalsMet() + " week";
+        if (getGoalsMet() == 1) {
+          document.getElementById("goalMet").innerHTML = getGoalsMet() + " week";
+        } else {
+          document.getElementById("goalMet").innerHTML = getGoalsMet() + " weeks";
+        }
       }
 
       document.getElementById("highest").innerHTML = getMax() + " /week";
