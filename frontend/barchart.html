@@ -53,8 +53,17 @@
     width: 70%;
     font-size: 12px;
     margin: 0 auto;
+    border: 1px;
+    border-color: black;
+    padding: 1em;
   }
 
+  .progress {
+    border: 1px;
+    border-color: black;
+    padding: 1em;
+  }
+  
 </style>
 
 <body>
@@ -72,7 +81,8 @@
 
 			<div id="wide">
 				<div class="textContainer">
-						<h2> Progress </h2>
+          <div class="progress">
+            <h2> Progress </h2>
 						<p>Weeks of Goals Met:</p>
 						<p id="goalMet">loading</p>
 						<p>Highest Number of Distractions:</p>
@@ -81,9 +91,10 @@
 						<p id="average">loading</p>
 						<p>Lowest Number of Distractions:</p>
 						<p id="lowest">loading</p>
+          </div>
             <br>
             <div class="legend">
-	      <h2> Legend </h2>
+              <h2> Legend </h2>
               <div class="boxyellow"></div>
       				<p>Weekly Goal</p>
               <div class="boxblue"></div>
