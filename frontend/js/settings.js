@@ -93,17 +93,28 @@ function submit() {
 	localStorage.removeItem("unset");
     /**** Storing API Keys ****/
     var calKey = $.trim($("#calKey").val()); // Pulling the value of the key from the ID Tag and trimming the whitespaces.
-    calKeyl = calKey.length;
+    var calEKey = $.trim($("#calEKey").val());
     var rtKey = $.trim($("#rtKey").val()); 
     var sDate = $.trim($("#dateInput").val());
-    if (calKeyl>0) { // If length of string is > 0.
+    var distractGoal = $.trim($("#distractionGoal").val());
+    var siteNum = $.trim($("#siteNum").val());
+    if (calKey.length>0) { // If length of string is > 0.
         localStorage.setItem('calKey',calKey); // Stores the variable "calKey" into localStorage, the key to access this in localStorage is also called calKey.
+    }
+    if(calEKey.length>0) {
+        localStorage.setItem('calEKey',calEKey);
     }
     if (rtKey.length>0) {
         localStorage.setItem('rtKey',rtKey);
     }
     if(sDate.length>0){
         localStorage.setItem('date',sDate);
+    }
+    if(distractGoal.length>0){
+        localStorage.setItem('distractionGoal',distractGoal);
+    }
+    if(siteNum.length>0){
+        localStorage.setItem('siteNum', siteNum);
     }
     
     /*
@@ -118,6 +129,14 @@ function submit() {
 
 
 $(document).ready(function() {
+    var dateCheck = localStorage.getItem('date'); // Fetches user-defined date input from localStorage
+    var rtCheck = localStorage.getItem('rtKey'); // 
+    var calKCheck = localStorage.getItem('calKey');
+    var calECheck = localStorage.getItem('calEKey');
+
+    if(dateCheck == null && rtCheck == null && calKCheck == null && calECheck == null){
+        window.location.href = "signup.html";
+    }
 	clean(data);
 	// display(unset);
     // display();

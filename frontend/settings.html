@@ -10,6 +10,12 @@
     <script language="JavaScript" type="text/javascript" src="js/d3.js"></script>
     <script language="JavaScript" type="text/javascript" src="js/settings.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <style>
+        .title {
+            padding-top: 50px;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -28,29 +34,34 @@
             Tick all boxes that would be considered work-related.</h4>
         </div>
         <div id='rtAPI' class="fContainer">
-
             <div class='aSettings'>
-                <h4>Make changes to the data that is being shown.</h4>
+                <h4>Make changes to the visualization.</h4>
                 <div id="calWrapper">
                     <p>Google Calender API Key:</p> <input type="text" name="calAPI" id="calKey" class="textInput"><br>
+                </div>
+                <div id="calEWrapper">
+                    <p>Google Calender API Key:</p> <input type="text" name="Calendar Email" id="calEKey" class="textInput"><br>
                 </div>
                 <div id="rtWrapper">
                     <p> Rescue Time API Key: </p><input type="text" name="rtAPI" id="rtKey" class="textInput">
                 </div>
                 <div id="dateWrapper">
-                    <p> Specific date (yyyy-mm--dd): </p><input type="text" name="rtAPI" id="rtKey" class="textInput">
+                    <p> Specific date (yyyy-mm--dd): </p><input type="text" name="rtAPI" id="dateInput" class="textInput">
+                </div>
+                <div id="siteNumWrapper">
+                    <p> Number of Sites Displayed (Maximum = 10):</p> <input type="text" name="siteNum" id="siteNum" class="textInput">
                 </div>
                 <div id="disWrapper">
-                    <p> Distraction Goals for Week: </p><input type="text" name = "distraction" class="textInput">
-                </div> 
-
+                    <p> Distraction Goals for Week: </p><input type="text" name="distraction" id="distractionGoal" class="textInput">
+                </div>
             </div>
         </div>
-        <div id="sbmWrapper">
-            <a href="index.html">
+    </div>
+    <div id="sbmWrapper">
+        <a href="index.html">
                 <input type="submit" id="sbm" value="Submit" onclick="submit();">
         </a>
-        </div>
+    </div>
 </body>
 <style>
 </style>

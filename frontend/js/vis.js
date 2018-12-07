@@ -11,15 +11,26 @@
 // });
 // PULLING FROM FILE
 
-var today, today2, day2, day, month, year;
-var userDate = localStorage.getItem('date');
+var today, today2, day2, day, month, year, siteNum;
+var userDate = localStorage.getItem('date'); // Fetches user-defined date input from localStorage
+var rtKey = localStorage.getItem('rtKey'); // 
+var calKey = localStorage.getItem('calKey');
+var calEKey = localStorage.getItem('calEKey');
+var numberSites = localStorage.getItem('siteNum');
 
+if(numberSites == null){
+    siteNum = 8;
+}
+else{ 
+    siteNum = numberSites; 
+}
+
+if(userDate == null && rtKey == null && calKey == null && calEKey == null){
+  window.location.href = "signup.html";
+}
 
 if(userDate != null) {
   today=userDate;
-  day=parseInt(userDate.substr(8,9),10);
-  month=parseInt(userDate.substr(5,6),10);
-  year=parseInt(userDate.substr(0,4),10);
   var temp = userDate.substr(8,9);
   var day2 = parseInt(temp, 10);
   day2 = day2+1;
@@ -48,8 +59,6 @@ else{
   var today2 = year + '-' + month + '-' + day2;
 }
 
-var rtKey = localStorage.getItem('rtKey');
-var calKey = localStorage.getItem('calKey');
 if(rtKey.length==0) {
   //Haven't set up RT API
   alert("Trouble finding your RescueTime API Key, please check that it is set up properly!");
@@ -60,10 +69,9 @@ if(calKey.length==0) {
 
 
 
-var apiKey1='B63mVDYNd_2h9n4dbHjgrjMyNBCjVdZUOH5luFCE';
 $.ajax({
   type: 'GET',
-  url: 'https://hourglass-api.herokuapp.com/api/rank-distract-for-d3?start_date='+today+'&end_date='+today+'&n=10',
+  url: 'https://hourglass-api.herokuapp.com/api/rank-distract-for-d3?start_date='+today+'&end_date='+today+'&n='+ siteNum,
   headers: { 'key': rtKey },
   success: function(data) {
     console.log(data);
@@ -79,8 +87,8 @@ $.ajax({
   type: 'GET',
   url: 'https://hourglass-api.herokuapp.com/api/get-calendar?start_date='+today+'&end_date='+today2,
   headers: { 
-    "Key": "AIzaSyBPhqIfGLwvO9srD22V8kLXAd3p58PxdjQ",
-    "calendar": "a2975667@gmail.com"
+    "Key": calKey,
+    "calendar": calEKey
   },
   success: function(data) {
     console.log(data);
@@ -96,7 +104,7 @@ $.ajax({
   type: 'GET',
   url: 'https://hourglass-api.herokuapp.com/api/pro-nonpro-time?start_date='+today+'&end_date='+today,
   headers: { 
-    "Key": "B63mVDYNd_2h9n4dbHjgrjMyNBCjVdZUOH5luFCE",
+    "Key": rtKey,
   },
   success: function(data) {
     console.log(data);
@@ -151,9 +159,9 @@ var visualize = function(data) {
         .scale(x)
         .orient("bottom")
         .ticks(7).outerTickSize(0)
-        .tickSize(0)
+        .tickSize(3)
         .tickPadding(10)
-        .tickFormat(d3.time.format("%H %p"));
+        .tickFormat(d3.time.format("%I %p"));
 
     var yAxis = d3.svg.axis()
         .scale(y)

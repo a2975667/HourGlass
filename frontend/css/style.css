@@ -38,12 +38,12 @@ body {
 
 /***** integrated Styling ****/
 
-.title {
+/*.title {
     padding-top: 50px;
     position: fixed;
     left: 50%;
     transform: translate(-50%, 0);
-}
+}*/
 
 
 h3,
@@ -142,7 +142,12 @@ h4 {
 /************ Settings Page Styling ************/
 
 .fWrapper {
-    padding: 150px;
+    padding-top: 50px;
+    /*padding-left: 150px;*/
+    min-height:664px;
+    padding-right: 200px;
+    display: flex;
+    justify-content: center;
 }
 
 input[type="text"] {
@@ -176,10 +181,11 @@ input:focus {
 .aSettings {
     padding:30px;
     border-width: 2px;
-    border-color: #eee;
+    border-color: #f3f3f3;
     border-radius: 25px;
     border-style: solid;
     min-width:400px;
+    background-color: #fafafa;
     /*background:#000;*/
     margin: 0 auto;
     /*height:200px;*/
@@ -191,18 +197,15 @@ input:focus {
   width: 100px;
   height: 100px;
   margin-right: 10px;
-  float: left;
-}
-.child_div_1 {
-  float: left;
-  margin-right: 5px;
+  /*float: left;*/
 }
 
 #form {
     border-width: 2px;
-    border-color: #eee;
+    border-color: #f3f3f3;
     border-radius: 25px;
     border-style: solid;
+    background-color: #fafafa;
     min-height: 400px;
     float: left;
 	padding: 30px;
@@ -214,14 +217,13 @@ input {
 }
 
 #sbm {
-    margin-top: 30px;
+    margin-top: 50px;
     text-align: center;
     /*margin-bottom:20px;*/
     background: #000;
     color:#fff;
     border-radius: 25px;
     letter-spacing: 1.6px;
-    color:#fff;
     cursor: pointer;
     border-color: #fff;
     border-style: solid;
@@ -233,15 +235,19 @@ input {
 
 
 #sbmWrapper {
-    padding-top: 40px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-bottom:50px;
 }
 
 #calWrapper {
     padding-bottom: 15px;
+}
+
+#calEWrapper {
+    padding-bottom: 30px;
 }
 
 #rtWrapper {
@@ -255,6 +261,11 @@ input {
 #disWrapper {
     padding-bottom: 30px; 
 }
+
+#siteNumWrapper {
+    padding-bottom: 30px;
+}
+
 
 /* Checkbox container */
 .inputLabel {
@@ -270,7 +281,7 @@ input {
     user-select: none;
 }
 
-/* Hiding default checkbox */
+/** Hiding the default checkbox **/
 .inputLabel input {
     position: absolute;
     opacity: 0;
@@ -279,7 +290,7 @@ input {
     width: 0;
 }
 
-/* Custom checkbox */
+/** Custom checkbox **/
 .checkmark {
     position: absolute;
     top: 0;
@@ -290,24 +301,22 @@ input {
 }
 
 
-/* When the checkbox is checked, add a blue background */
+/** When the checkbox is checked, add a yellow background **/
 .inputLabel input:checked ~ .checkmark {
     background-color: #ffcc2e;
 }
 
-/* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
     content: "";
     position: absolute;
     display: none;
 }
 
-/* Show the checkmark when checked */
+
 .inputLabel input:checked ~ .checkmark:after {
     display: block;
 }
 
-/* Style the checkmark/indicator */
 .inputLabel .checkmark:after {
     left: 9px;
     top: 5px;
