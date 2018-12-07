@@ -22,6 +22,12 @@
     vertical-align: middle;
 	}
 
+  #d3id {
+    text-align: center;
+    font-family: 'Raleway';
+    font-size: 23px;
+  }
+
 	.boxblue {
 		background-color: #5f66fb;
   	position: absolute;
@@ -91,8 +97,12 @@
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
-
   var today = new Date();
+
+  // if (localStorage.getItem('date') != null) {
+  //   var userDate = localStorage.getItem('date');
+  // }
+
   var day = today.getDate();
   var month = today.getMonth() + 1;
   var year = today.getFullYear();
@@ -160,8 +170,18 @@
     "goal":0
   }]; // set up data array to keep all the weeks in order
 
-  // set up graph before data loads
+if ((localStorage.getItem('productive') == null && localStorage.getItem('non-productive') == null)) {
+  // if graph would be empty
 
+  var div = document.getElementById('d3id');
+  div.innerHTML += "Please set productive sites in settings to view your distractions overview.";
+
+  document.getElementById("goalMet").innerHTML = "Unavailable";
+  document.getElementById("highest").innerHTML = "Unavailable";
+  document.getElementById("lowest").innerHTML = "Unavailable";
+  document.getElementById("average").innerHTML = "Unavailable";
+} else {
+  // set up graph before data loads
 		var container = d3.select('#d3id'),
 		    width = 750,
 		    height = 400,
@@ -176,6 +196,12 @@
 		   .append("g")
 		   .attr("transform", `translate(${margin.left},${margin.top})`);
 
+    var tooltip = d3.select("#d3id")
+       .append('div')
+       .attr('class', 'tooltip');
+
+    tooltip.append('div').attr('class', 'name');
+
 		// set up scales:
 		var xScale0 = d3.scaleBand().range([0, width - margin.left - margin.right]).padding(barPadding);
 		var xScale1 = d3.scaleBand();
@@ -187,7 +213,6 @@
 		var yAxis = d3.axisLeft(yScale)
 				.tickSizeOuter(axisTicks.outerSize);
 
-  // TODO: elegant solution for less than 3 weeks of data
   // these ajax calls are hardcoded to each week element because the loop was glitchy
 
   $.ajax({
@@ -251,20 +276,6 @@
         .attr("class", "tag")
         .attr("transform", d => `translate(${xScale0(d.tag)},0)`);
 
-      // var tipD = d3.tip()
-      //   .offset([-10, 0])
-      //   .html(function(d) {
-      //     return "<strong>Distractions:</strong> <span style='color:red'>" + d.distractions + "</span>";
-      //   });
-      //
-      // var tipG = d3.tip()
-      //   .offset([-10, 0])
-      //   .html(function(d) {
-      //     return "<strong>Weekly Goal:</strong> <span style='color:yellow'>" + d.goal + "</span>";
-      //   });
-      //
-      // svg.call(tip);
-
       tag.selectAll(".bar.distractions")
         .data(d => [d])
         .enter()
@@ -282,10 +293,23 @@
         .attr("width", xScale1.bandwidth())
         .attr("height", d => {
           return height - margin.top - margin.bottom - yScale(d.distractions)
-        });
-        // .on('mouseover', tipD.show)
-        // .on('mouseout', tipD.hide);
+        })
+        .on('mouseover', function(d) {
 
+          tooltip.select('.name').html("Distractions: <b>" + d.distractions + "</b>");
+          tooltip.style('display', 'block');
+          tooltip.style('opacity', 2);
+
+        })
+        .on('mousemove', function(d) {
+          tooltip.style('top', (d3.event.layerY + 10) + 'px')
+          .style('left', (d3.event.layerX) + 'px');
+          console.log(d3.event.layerX);
+        })
+        .on('mouseout', function() {
+          tooltip.style('display', 'none');
+          tooltip.style('opacity',0);
+        });
 
       tag.selectAll(".bar.goal")
         .data(d => [d])
@@ -298,9 +322,23 @@
         .attr("width", (xScale1.bandwidth() / 8))
         .attr("height", d => {
           return height - margin.top - margin.bottom - yScale(d.goal)
+        })
+        .on('mouseover', function(d) {
+
+          tooltip.select('.name').html("Goal: <b>" + d.goal + "</b>");
+          tooltip.style('display', 'block');
+          tooltip.style('opacity', 2);
+
+        })
+        .on('mousemove', function(d) {
+          tooltip.style('top', (d3.event.layerY + 10) + 'px')
+          .style('left', (d3.event.layerX) + 'px');
+          console.log(d3.event.layerX);
+        })
+        .on('mouseout', function() {
+          tooltip.style('display', 'none');
+          tooltip.style('opacity',0);
         });
-        // .on('mouseover', tipG.show)
-        // .on('mouseout', tipG.hide);
 
       svg.append("g")
          .attr("class", "x axis")
@@ -367,6 +405,7 @@
         alert('error');
     }
   });
+}
 
 </script>
 </body>
