@@ -13,6 +13,7 @@
 			* {
 				margin: 0;
 				padding: 0;
+				box-sizing: border-box;
 			}
 			.imgbox {
 				display: grid;
@@ -23,6 +24,18 @@
 				max-width: 98.9vw;
 				margin: auto;
 			}
+			.column {
+				float: left;
+				width: 50%;
+			}
+			.row:after {
+				content: "";
+				display: table;
+				clear: both;
+			}
+			.center {
+				text-align: center;
+			}
 		</style>
 </head>
 
@@ -31,11 +44,36 @@
 	<div class = "imgbox">
 		<img class = "center-fit" src = "css/tutorial_bg.jpg" alt="Tutorial">
 	</div>
-	<form action="/action_page.php">
-  Google API Key: <input type="text" name="calKeyInput"><br>
-  RescueTime API Key: <input type="text" name="rtKeyInput"><br>
-  <input type="submit" value="Submit">
-</form>
+	<div class = "row">
+		<div class = "column">
+				<label for="calKeyInput"><h2>Enter your Google Calendar API Key</h2></label>
+				<div class = "center">
+					<input type="text" id="calKeyInput" name="calKeyInput">
+				</div>
+				<a href="https://docs.simplecalendar.io/google-api-key/" target="_blank"><h1>How to set up your Google API Key<h1/></a>
+		</div>
+		<div class = "column">
+				<label for="rtKeyInput"><h2>Enter your RescueTime API Key</h2></label>
+				<div class="center">
+					<input type="text" id="rtKeyInput" name="rtKeyInput">
+				</div>
+		</div>
+	</div>
+	<div class="center">
+		<button type="button" id="submit_btn" name="submit_btn">Submit</button>
+	</div>
+	<script>
+		$('#submit_btn').on('click', function() {
+			if(document.getElementById("rtKeyInput").value == '' && document.getElementById("calKeyInput").value == '') {
+				localStorage.setItem('rtKey', 'AIzaSyBPhqIfGLwvO9srD22V8kLXAd3p58PxdjQ');
+				localStorage.setItem('calKey', 'B63mVDYNd_2h9n4dbHjgrjMyNBCjVdZUOH5luFCE');
+			} else {
+				localStorage.setItem('rtKey', document.getElementById("rtKeyInput").value);
+				localStorage.setItem('calKey', document.getElementById("calKeyInput").value);
+			}
+			window.location.href = 'index.html';
+		})
+	</script>
 </body>
 
 </html>
