@@ -14,14 +14,12 @@
 
 <style>
 	#graph {
-		width: 55%;
-		margin-top: 5%;
-		margin-left: 8%;
-    background-size: cover;
-    height: 100vh;
-    background-position: center;
-    vertical-align: middle;
+		margin-top: 50px;
+    float:left;
 	}
+  #wide {
+    float:left;
+  }
 
   #d3id {
     text-align: center;
@@ -62,16 +60,28 @@
   }
 
   .progress {
+    
+    height: 220px;
+    margin-top: 720px;
+  position: absolute;
+  margin-left:auto;
+  margin-right: auto;
+    top: 0; left: 0; bottom: 0; right: 0;    
     border: 1px;
     border-color: black;
     border-style: solid;
     padding: 2em;
+    width:300px;
     border-radius: 1em;
   }
 
-  .legend_items {
-      width: 100%;
-      margin: 0 25%;
+  .legend {
+    height:140px;
+      width: 170px;
+      margin:auto;
+       top: 0; left: 0; bottom: 0; right: 0;
+      position: absolute;
+      margin-top: 500px;
   }
 
   .legend_items p {
@@ -79,6 +89,10 @@
       padding-left: 2em;
   }
   
+  body {
+    bottom: : 90px !important;
+  }
+
 </style>
 
 <body>
@@ -88,14 +102,13 @@
 			<a class="active" href="">Distractions</a>
 	</div>
 
-	<div id="parent">
+	<div>
 			<div id="graph">
 				<h2> 3-Week Overview </h2>
 				<div id="d3id"></div>
 			</div>
 
-			<div id="wide">
-				<div class="textContainer">
+				<div>
           <div class="progress">
             <h2> Progress </h2>
 						<p>Weeks of Goals Met:</p>
@@ -120,7 +133,6 @@
 							</div>
             </div>
 				</div>
-			</div>
 	</div>
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -215,7 +227,7 @@ if ((localStorage.getItem('productive') == null && localStorage.getItem('non-pro
 } else {
   // set up graph before data loads
 		var container = d3.select('#d3id'),
-		    width = 750,
+		    width = 450,
 		    height = 400,
 		    margin = {top: 30, right: 20, bottom: 30, left: 50},
 		    barPadding = .2,

@@ -1,147 +1,254 @@
-
 @media only screen and (max-width: 1050px) {
-  body {
-  }
-  h2 {
-  	font-size:1.4em;
-  }
-  h3 {
-  	font-size:0.9em;
-  }
-  #container {
-  	height: 40px;
-  }
+    body {}
 
-  .fWrapper {
-    padding-top: 50px;
-    min-height:500px;
-    padding-right: 200px;
+    h2 {
+        font-size: 1.4em;
+    }
+
+    h3 {
+        font-size: 0.9em;
+    }
+
+    #container {
+        height: 40000px;
+    }
+
+    .fWrapper {
+        padding-top: 50px;
+        min-height: 500px;
+        padding-right: 200px;
+    }
+
+    .textInput {
+        width: 250px;
+        border-color: #eee;
+    }
+
+    .fContainer {
+        padding-left: 15px;
+        padding-right: 15px;
+        font-family: 'Raleway';
+        font-size: 13px;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    .aSettings {
+        padding: 20px;
+        min-width: 300px;
+    }
+
+    #form {
+        background-color: #fafafa;
+        float: left;
+        width: 240px;
+    }
+
+    #sbm {
+        margin-top: 150px;
+    }
+
+    /* Checkbox container */
+    .inputLabel {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        font-size: 14px;
+    }
+
+
 }
 
-.textInput {
-    width:250px;
-    border-color: #eee;
-}
-
-.fContainer {
-    padding-left: 15px;
-    padding-right: 15px;
-    font-family: 'Raleway';
-    font-size: 13px;
-}
-input:focus {
-    outline:none;
-}
-
-.aSettings {
-    padding:20px;
-    min-width:300px;
-}
-
-#form {
-    background-color: #fafafa;
-    min-height: 465px;
-    float: left;
-	width:240px;
-}
-
-
-/* Checkbox container */
-.inputLabel {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    font-size: 14px;
-}
+@media only screen and (min-width: 1080px) {
+    #form {
+        min-height: 400px;
+    }
 
 
 }
-
 
 @media only screen and (max-width: 800px) {
-  body {
-  }
-  h2 {
-  	font-size:1.4em;
-  }
-  h3 {
-  	font-size:0.9em;
-  }
-  #container {
-  	height: 40px;
-  }
+    body {}
 
-  .fWrapper {
-    padding-top: 50px;
-    min-height:500px;
-    padding-right: 200px;
+    h2 {
+        font-size: 1.4em;
+    }
+
+    h3 {
+        font-size: 0.9em;
+    }
+
+    #sbm {
+        margin-top: 100px;
+    }
+
+    #container {
+        height: 40px;
+    }
+
+    .fWrapper {
+        padding-top: 50px;
+        min-height: 500px;
+        padding-right: 200px;
+    }
+
+    .textInput {
+        width: 200px;
+        border-color: #eee;
+        padding: 10px 13px 8px 13px;
+    }
+
+    .fContainer {
+        padding-left: 15px;
+        padding-right: 15px;
+        font-family: 'Raleway';
+        font-size: 13px;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    .aSettings {
+        padding: 20px;
+        min-width: 270px;
+    }
+
+    #calWrapper {
+        padding-bottom: 7.5px;
+    }
+
+    #calEWrapper {
+        padding-bottom: 7.5px;
+    }
+
+    #rtWrapper {
+        padding-bottom: 15px;
+    }
+
+    #dateWrapper {
+        padding-bottom: 15px;
+    }
+
+
+    #disWrapper {
+        padding-bottom: 15px;
+    }
+
+    #siteNumWrapper {
+        padding-bottom: 15px;
+    }
+
+
+    #form {
+        background-color: #fafafa;
+        float: left;
+        width: 180px;
+    }
+
+
+    /* Checkbox container */
+    .inputLabel {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        font-size: 14px;
+    }
+
+}
+
+@media only screen and (min-width: 630px) {
+	.progress {
+		height: 220px;
+		margin-top:500px !important;
+	}
+	.legend {
+		margin-left:400px !important;
+		margin-top: 100px !important;
+	}
+
+}
+
+@media only screen and (min-width: 1050px) {
+	.progress {
+		height: 220px;
+		margin-top:100px !important;
+		margin-left: 650px !important;
+	}
+
+
 }
 
 
+@media only screen and (max-width: 620px) {
 
-.textInput {
-    width:200px;
-    border-color: #eee;
-    padding: 10px 13px 8px 13px;
-}
+    h2 {
+        font-size: 1.2em;
+    }
 
-.fContainer {
-    padding-left: 15px;
-    padding-right: 15px;
-    font-family: 'Raleway';
-    font-size: 13px;
-}
-input:focus {
-    outline:none;
-}
+    h3 {
+        font-size: 0.8em;
+    }
 
-.aSettings {
-    padding:20px;
-    min-width:270px;
-}
+    .fWrapper {
+        padding-top: 20px;
+        min-height: 500px;
+        padding-right: 200px;
+    }
 
-#calWrapper {
-    padding-bottom: 7.5px;
-}
-
-#calEWrapper {
-    padding-bottom: 7.5px;
-}
-
-#rtWrapper {
-    padding-bottom: 15px;
-}
-
-#dateWrapper {
-    padding-bottom: 15px;
-}
-
-#disWrapper {
-    padding-bottom: 15px; 
-}
-
-#siteNumWrapper {
-    padding-bottom: 15px;
-}
+    #form {
+        background-color: #fafafa;
+        height: 200px;
+        float: none;
+        margin-left: 240px;
+        width: 180px;
+    }
 
 
-#form {
-    background-color: #fafafa;
-    min-height: 465px;
-    float: left;
-	width:180px;
-}
+
+    /*    .textInput {
+        width: 200px;
+        border-color: #eee;
+        padding: 10px 13px 8px 13px;
+    }
+*/
+    input:focus {
+        outline: none;
+    }
+
+    .aSettings {
+        position: absolute;
+        margin-top: 500px;
+        padding: 20px;
+        margin-left: -310px;
+        min-width: 270px;
+    }
+
+    /*
+    #sbm, #sbmWrapper {
+    	margin-top: 400px;
+    }*/
+    #sbm {
+        margin-top: 600px;
+    }
 
 
-/* Checkbox container */
-.inputLabel {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    font-size: 14px;
-}
+    /* Checkbox container */
+    .inputLabel {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        font-size: 14px;
+    }
 
+    .checkmark {
+        height: 15px;
+        width: 15px;
+    }
 
 }

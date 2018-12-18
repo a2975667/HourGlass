@@ -367,7 +367,9 @@ p {
 }
 
 .textContainer {
-    padding: 70px;
+    padding-top:70px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 .auth {
