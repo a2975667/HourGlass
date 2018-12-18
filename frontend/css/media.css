@@ -1,0 +1,147 @@
+
+@media only screen and (max-width: 1050px) {
+  body {
+  }
+  h2 {
+  	font-size:1.4em;
+  }
+  h3 {
+  	font-size:0.9em;
+  }
+  #container {
+  	height: 40px;
+  }
+
+  .fWrapper {
+    padding-top: 50px;
+    min-height:500px;
+    padding-right: 200px;
+}
+
+.textInput {
+    width:250px;
+    border-color: #eee;
+}
+
+.fContainer {
+    padding-left: 15px;
+    padding-right: 15px;
+    font-family: 'Raleway';
+    font-size: 13px;
+}
+input:focus {
+    outline:none;
+}
+
+.aSettings {
+    padding:20px;
+    min-width:300px;
+}
+
+#form {
+    background-color: #fafafa;
+    min-height: 465px;
+    float: left;
+	width:240px;
+}
+
+
+/* Checkbox container */
+.inputLabel {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+
+}
+
+
+@media only screen and (max-width: 800px) {
+  body {
+  }
+  h2 {
+  	font-size:1.4em;
+  }
+  h3 {
+  	font-size:0.9em;
+  }
+  #container {
+  	height: 40px;
+  }
+
+  .fWrapper {
+    padding-top: 50px;
+    min-height:500px;
+    padding-right: 200px;
+}
+
+
+
+.textInput {
+    width:200px;
+    border-color: #eee;
+    padding: 10px 13px 8px 13px;
+}
+
+.fContainer {
+    padding-left: 15px;
+    padding-right: 15px;
+    font-family: 'Raleway';
+    font-size: 13px;
+}
+input:focus {
+    outline:none;
+}
+
+.aSettings {
+    padding:20px;
+    min-width:270px;
+}
+
+#calWrapper {
+    padding-bottom: 7.5px;
+}
+
+#calEWrapper {
+    padding-bottom: 7.5px;
+}
+
+#rtWrapper {
+    padding-bottom: 15px;
+}
+
+#dateWrapper {
+    padding-bottom: 15px;
+}
+
+#disWrapper {
+    padding-bottom: 15px; 
+}
+
+#siteNumWrapper {
+    padding-bottom: 15px;
+}
+
+
+#form {
+    background-color: #fafafa;
+    min-height: 465px;
+    float: left;
+	width:180px;
+}
+
+
+/* Checkbox container */
+.inputLabel {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+
+}

@@ -2,6 +2,9 @@
 .topnav {
     overflow: hidden;
     position: fixed;
+    z-index: 5;
+    background-color: #fff;
+    border-radius: 25px;
 }
 
 /* Style the links inside the navigation bar */
@@ -45,24 +48,31 @@ body {
     transform: translate(-50%, 0);
 }*/
 
-
+h1,
 h3,
 h2,
 h4,
+h5,
 p {
     padding:0px;
     margin:0px;
     text-align: center;
     font-family: 'Raleway';
-    /*font-weight:normal;*/
+    font-weight:normal;
 }
-
+h1 {
+    font-family: 'Raleway';
+    font-weight: bold;
+    padding-left: 20px;
+    padding-right: 20px;
+}
 h2 {
     padding-bottom:10px;
     font-size: 2em;
     font-weight: bold;
 }
-
+label {
+}
 h3 {
     font-size: 1em;
     font-weight: normal;
@@ -70,6 +80,11 @@ h3 {
 h4 {
     padding-bottom: 30px;
     font-size: 1.2em;
+}
+h5 {
+    padding-top: 50px;
+    padding-bottom: 10px;
+    font-size:1.2em;
 }
 
 /*#settings {
@@ -114,10 +129,6 @@ h4 {
 
 #container {
     /*width: 100%;*/
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    align-items: center;
     padding-top: 40px;
     padding-left:50px;
 }

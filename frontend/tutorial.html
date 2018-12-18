@@ -9,8 +9,8 @@
     <script language="JavaScript" type="text/javascript" src="js/jquery.min.js"></script>
     <script language="JavaScript" type="text/javascript" src="js/d3.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-		<style>
-			* {
+    <style>
+        * {
 				margin: 0;
 				padding: 0;
 				box-sizing: border-box;
@@ -27,17 +27,19 @@
 			.button {
 				background-color: #81CAF0; /* Green */
 				border: none;
-			 color: white;
-			 padding: 10px 20px;
-			 text-align: center;
-			 text-decoration: none;
-			 display: inline-block;
-			 font-size: 16px;
-			 margin: 25px 5px;
+			 	color: white;
+			 	padding: 10px 20px;
+			 	text-align: center;
+			 	text-decoration: none;
+			 	display: inline-block;
+			 	font-size: 16px;
+			 	margin: 25px 5px;
 			}
 			.column {
 				float: left;
 				width: 50%;
+				padding-bottom: 50px;
+				padding-top: 20px;
 			}
 			.row:after {
 				content: "";
@@ -48,65 +50,60 @@
 				text-align: center;
 			}
 			a {
-				color:#116 !important;
+				color:#000 !important;
+				text-decoration: underline;
 			}
 			body {
 				padding-bottom: 70px;
 			}
+
 		</style>
 </head>
 
-
 <body>
-	<div class = "imgbox">
-		<img class = "center-fit" src = "css/tutorial_bg.jpg" alt="Tutorial">
-		<h1 class = "center-fit">Note: For demo purposes, you can submit without entering any key, which would load the demo.</h1>
-		<br>
-		<br>
-	</div>
-	
-	<div class = "row">
-	
-		<div class = "column">
-		<a href="https://docs.simplecalendar.io/google-api-key/" target="_blank"><p>How to set up your Google API Key<p></a>
-				<label for="calKeyInput"><h2>Enter your Google Calendar API Key</h2></label>
-				<div class = "center">
-					<input type="text" id="calKeyInput" name="calKeyInput">
-				</div>
-				<label for="calEKeyInput"><h2>Enter your Google Calendar Email Address</h2></label>
-				<div class = "center">
-					<input type="text" id="calEKeyInput" name="calEKeyInput">
-					
-				</div>
-		</div>
-		<div class = "column">
-
-		</div>
-		<div class = "column">
-				<label for="rtKeyInput"><h2>Enter your RescueTime API Key</h2></label>
-				<div class="center">
-					<input type="text" id="rtKeyInput" name="rtKeyInput">
-					<a href="https://www.rescuetime.com/apidoc" target="_blank"><p>How to set up your RescueTime API Key<p></a>
-					<button class="button" id="submit_btn" name="submit_btn">Submit</button>
-				</div>
-		</div>
-	</div>
-	<div class="center">
-	</div>
-	<script>
-		$('#submit_btn').on('click', function() {
-			if(document.getElementById("rtKeyInput").value == '' && document.getElementById("calKeyInput").value == '') {
-				localStorage.setItem('rtKey', 'B63mVDYNd_2h9n4dbHjgrjMyNBCjVdZUOH5luFCE');
-				localStorage.setItem('calKey', 'AIzaSyBPhqIfGLwvO9srD22V8kLXAd3p58PxdjQ');
-				localStorage.setItem('calEKey', 'a2975667@gmail.com');
-			} else {
-				localStorage.setItem('rtKey', document.getElementById("rtKeyInput").value);
-				localStorage.setItem('calKey', document.getElementById("calKeyInput").value);
-				localStorage.setItem('calEKey', document.getElementById("calEKeyInput").value);
-			}
-			window.location.href = 'index.html';
-		})
-	</script>
+    <div class="imgbox">
+        <img class = "center-fit" src = "css/tutorial_bg.jpg" alt="Tutorial">
+        <h1 class = "center-fit">Note: For demo purposes, you can submit without entering any key, which would load the demo.</h1>
+        <br>
+        <br>
+    </div>
+    <div class="row">
+        <div class="column">
+            <a href="https://docs.simplecalendar.io/google-api-key/" target="_blank"><p>How to set up your Google API Key<p></a>
+            <label for="calKeyInput"><h5>Enter your Google Calendar API Key</h5></label>
+            <div class="center">
+                <input type="text" id="calKeyInput" name="calKeyInput" class="textInput">
+            </div>
+            <label for="calEKeyInput"><h5>Enter your Google Calendar Email Address</h5></label>
+            <div class="center">
+                <input type="text" id="calEKeyInput" name="calEKeyInput" class="textInput">
+            </div>
+        </div>
+        <div class="column">
+            <a href="https://www.rescuetime.com/apidoc" target="_blank"><p>How to set up your RescueTime API Key<p></a>
+            <label for="rtKeyInput"><h5>Enter your RescueTime API Key</h5></label>
+            <div class="center">
+                <input type="text" id="rtKeyInput" name="rtKeyInput" class="textInput">
+                <button class="button" id="submit_btn" name="submit_btn">Submit</button>
+            </div>
+        </div>
+    </div>
+    <div class="center">
+    </div>
+    <script>
+    $('#submit_btn').on('click', function() {
+        if (document.getElementById("rtKeyInput").value == '' && document.getElementById("calKeyInput").value == '') {
+            localStorage.setItem('rtKey', 'B63mVDYNd_2h9n4dbHjgrjMyNBCjVdZUOH5luFCE');
+            localStorage.setItem('calKey', 'AIzaSyBPhqIfGLwvO9srD22V8kLXAd3p58PxdjQ');
+            localStorage.setItem('calEKey', 'a2975667@gmail.com');
+        } else {
+            localStorage.setItem('rtKey', document.getElementById("rtKeyInput").value);
+            localStorage.setItem('calKey', document.getElementById("calKeyInput").value);
+            localStorage.setItem('calEKey', document.getElementById("calEKeyInput").value);
+        }
+        window.location.href = 'index.html';
+    })
+    </script>
 </body>
 
 </html>
